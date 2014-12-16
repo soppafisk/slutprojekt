@@ -30,3 +30,33 @@ function dbQuery($query) {
 
 	return $data;
 }
+
+////////////////////////////////////////////////////////////////////
+/// Send query to db, return data[]
+function sqlQuery($query) {
+	$mysqli = new mysqli(SERVERNAME, USERNAME, PASSWORD, DATABASE);
+
+	if ($mysqli->connect_errno) {
+	    print "Kunde inte ansluta till databasen (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+	}
+
+	$data = [];
+	if ($result = $mysqli->query($query)) {
+		while($row = $result->fetch_array()) {
+			$data[] = $row;
+		}
+		$result->close();
+	}
+
+	$mysqli->close();
+	return $data;
+}
+
+////////////////////////////////////////////////////////////////////
+/// Check if user in session/logged in, return bool
+function isLoggedIn() {
+	if (isset($_SESSION['user']))
+		return true;
+	else 
+		return false;
+}

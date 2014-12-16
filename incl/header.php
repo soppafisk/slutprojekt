@@ -15,9 +15,15 @@
 <body>
 
 <nav id="headernav">
-	<a href="index.php">Hem</a>
-	<a href="index.php?p=login">Logga in</a>
-	<a href="index.php?p=logout">Logga ut</a>
+	<a href="index.php">Hem</a>	
 	<a href="index.php?p=register">Registrera</a>
 	<a href="index.php?p=writepost">Skriv inlägg</a>
 </nav>
+
+<?php
+if (isLoggedIn()) {
+	print "Inloggad som: " . $_SESSION['user']['username'];
+	print " <a href='index.php?p=logout'>Logga ut</a>";
+} else {
+	print "<a href='index.php?p=login'>Logga in</a>";
+}

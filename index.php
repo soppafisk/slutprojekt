@@ -21,6 +21,9 @@ if (isset($_GET['p'])) {
 		case 'profile':
 			require "profile.php";
 			break;
+		case 'post':
+			require "post.php";
+			break;
 		case 'writepost':
 			require "writepost.php";
 			break;

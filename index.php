@@ -5,6 +5,7 @@ session_start();
 require_once "config.php";
 require_once "functions/functions.php";
 
+
 if (isset($_GET['p'])) {
 	$page = $_GET['p'];
 
@@ -35,8 +36,12 @@ if (isset($_GET['p'])) {
 } else {
 	require "list.php";
 }
+
+require "incl/aside.php";
 ?>
 
 
+
+</div>
 </body>
 </html>

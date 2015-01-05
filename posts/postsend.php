@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 	}
 
 	if (filter_var($_POST['link'], FILTER_VALIDATE_URL)) 
-		$link 	= $_POST['link'];
+		$link = $_POST['link'];
 	else {
 		$error = true;
 		$_SESSION['feedback']['link'] = "Du måste ange en riktig länk";

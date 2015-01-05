@@ -42,7 +42,7 @@ function sqlQuery($query) {
 
 	$data = [];
 	if ($result = $mysqli->query($query)) {
-		while($row = $result->fetch_array()) {
+		while($row = $result->fetch_assoc()) {
 			$data[] = $row;
 		}
 		$result->close();

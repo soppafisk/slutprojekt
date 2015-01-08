@@ -29,11 +29,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		$_SESSION['feedback']['link'] = "Du måste ange en riktig länk";
 	}
 
-	if (strlen($_POST['content']) <= 2000) {
+	if (strlen($_POST['content']) <= 2000 && strlen($_POST['content']) > 3) {
 		$content= $mysqli->real_escape_string($_POST['content']);
 	} else {
 		$error = true;
-		$_SESSION['feedback']['content'] = "Beskrivningen får vara högst 2000 tecken";
+		$_SESSION['feedback']['content'] = "Beskrivningen måste vara mellan 3 och 2000 tecken";
 	}
 
 
@@ -60,7 +60,5 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 } // if post
 
-
-var_dump($_SESSION);
-
-var_dump($_POST);
+header("Location: ../index.php");
+die;

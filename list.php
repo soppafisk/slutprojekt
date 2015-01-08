@@ -12,8 +12,7 @@
 			print " ";
 			print "NSFW";
 		}
-		print "<h4 class='post_title'>" . $post['title'] . "</h4>";
-		print "<br>";
+		print "<h4 class='post_title'><a href='" . $post['link'] .  "'>" . $post['title'] . "</a></h4>";
 		print $post['username'];
 
 		print "<br>";

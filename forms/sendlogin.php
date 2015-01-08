@@ -17,7 +17,7 @@ if (password_verify($password, $user[0]['password'])) {
 	header('Location: ../index.php');
 	die;
 } else {
-	$_SESSION['feedback'] = ['color' => 'green', 'message' =>'Användarnamnet eller lösenordet är fel'];
+	$_SESSION['feedback'] = ['color' => 'red', 'message' =>'Användarnamnet eller lösenordet är fel'];
 	header('Location: ../index.php?p=login');
 	die;
 }

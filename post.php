@@ -17,9 +17,7 @@ if (isset($_GET['id'])) {
 ?>
 
 <h1>POST</h1>
-<pre>
 <?php 
-print_r($post);
 if ($post['nsfw'] == true) {
 	print "NSFW <br>";
 }
@@ -29,17 +27,35 @@ print "Av " . $post['username'] . " den " . $post['post_date'];
 print "<p class='single-post content'>"; 
 print $post['content']; 
 print "</p>";
+
+
+if (isLoggedIn()) {
+	print "(Inloggad som " . $_SESSION['user']['username'] . ")";
+	$_SESSION['commentOnPost'] = $post['id'];
 ?>
-<form action="commentsend" method="POST">
-	<textarea name="comment" rows="3"></textarea>
-	<input type="submit" value="skicka">
-</form>
+	<form action="posts/commentsend.php" method="POST">
+		<textarea name="content" rows="3"></textarea>
+		<input type="submit" value="Skicka">
+	</form>
+
+<?php
+	if (isset($_SESSION['feedback'])) {
+		print $_SESSION['feedback']['message'];
+	}
+} else {
+	print "<a href='index.php?p=login'>Logga in</a> för att kommentera";
+}
+
+?>
+
 
 <?php 
 print "<hr>";
+print "<pre>";
 
 foreach ($comments as $comment) {
 	print_r($comment);
+	print $comment['content'];
 } 
 ?>
 

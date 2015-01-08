@@ -20,15 +20,15 @@
 		<a href="index.php"><img src="img/logo.png" alt="logo"></a>
 		<nav id="headernav">
 			<a href="index.php">Hem</a>
-			<a href="index.php?p=writepost">Skriv inlägg</a>
-					<?php
-		if (isLoggedIn()) {
-			print "Inloggad som: " . $_SESSION['user']['username'];
-			print " <a href='index.php?p=logout'>Logga ut</a>";
-		} else {
-			print "<a href='index.php?p=login'>Logga in</a>";
-		}
-		?>
+			<?php
+			if (isLoggedIn()) {
+				print "<a href='index.php?p=writepost'>Skriv inlägg</a> ";
+				print "Inloggad som: <a href='index.php?p=profile&u=" . $_SESSION['user']['username'] . "'>" . $_SESSION['user']['username'] . "</a>";
+				print " <a href='index.php?p=logout'>Logga ut</a>";
+			} else {
+				print "<a href='index.php?p=login'>Logga in</a>";
+			}
+			?>
 		</nav>
 
 	</header>

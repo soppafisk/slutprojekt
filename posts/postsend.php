@@ -15,6 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 	$stmt = $mysqli->prepare("INSERT INTO posts (title, link, content, nsfw, user_id, cat_id) VALUES (?, ?, ?, ?, ?, ?)");
 	$stmt->bind_param('ssssii', $title, $link, $content, $nsfw, $user_id, $cat_id);
 
+	// VALIDATION
 	if (strlen($_POST['title']) > 2) {
 		$title 	= $mysqli->real_escape_string($_POST['title']);
 	} else {
@@ -26,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		$link = $_POST['link'];
 	else {
 		$error = true;
-		$_SESSION['feedback']['link'] = "Du måste ange en riktig länk";
+		$_SESSION['feedback']['link'] = "Du måste ange en riktig länk. Glöm inte http:// och sånt";
 	}
 
 	if (strlen($_POST['content']) <= 2000 && strlen($_POST['content']) > 3) {
@@ -35,7 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		$error = true;
 		$_SESSION['feedback']['content'] = "Beskrivningen måste vara mellan 3 och 2000 tecken";
 	}
-
 
 	if (isset($_POST['nsfw'])) 
 		$nsfw = true;

@@ -1,11 +1,11 @@
-<?php require_once "incl/header.php";  ?>
+<?php require_once "incl/header.php"; ?>
 
 <div class="col-8">
 
 <?php
 
 if (isset($_GET['id'])) {
-	$id = $_GET['id'];
+	$id = filter_var($_GET['id'], FILTER_SANITIZE_INT);
 	
 	$result = sqlQuery("SELECT posts.*, users.username FROM posts JOIN users on posts.user_id = users.id and posts.id='$id'");
 	$post = $result[0];
@@ -22,7 +22,7 @@ if ($post['nsfw'] == true) {
 	print "NSFW <br>";
 }
 
-print "<h4>" . $post['title'] . "</h4>";
+print "<h4 class='post_title'><a href='" . $post['link'] .  "'>" . $post['title'] . "</a></h4>";
 print "Av " . $post['username'] . " den " . $post['post_date'];
 print "<p class='single-post content'>"; 
 print $post['content']; 

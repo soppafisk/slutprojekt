@@ -10,7 +10,7 @@ if (isset($_GET['id'])) {
 	$result = sqlQuery("SELECT posts.*, users.username FROM posts JOIN users on posts.user_id = users.id and posts.id='$id'");
 	$post = $result[0];
 
-	$comments = sqlQuery("SELECT * FROM comments WHERE post_id='$id'");
+	$comments = sqlQuery("SELECT comments.*, users.username FROM comments JOIN users on comments.user_id = users.id and comments.post_id='$id'");
 }
 
 
@@ -41,6 +41,7 @@ if (isLoggedIn()) {
 <?php
 	if (isset($_SESSION['feedback'])) {
 		print $_SESSION['feedback']['message'];
+		unset($_SESSION['feedback']);
 	}
 } else {
 	print "<a href='index.php?p=login'>Logga in</a> för att kommentera";
@@ -54,8 +55,10 @@ print "<hr>";
 print "<pre>";
 
 foreach ($comments as $comment) {
-	print_r($comment);
+	print $comment['username'];
+	print "<br>";
 	print $comment['content'];
+	print "<hr>";
 } 
 ?>
 

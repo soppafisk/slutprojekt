@@ -5,7 +5,7 @@
 <?php
 
 if (isset($_GET['id'])) {
-	$id = filter_var($_GET['id'], FILTER_SANITIZE_INT);
+	$id = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
 	
 	$result = sqlQuery("SELECT posts.*, users.username FROM posts JOIN users on posts.user_id = users.id and posts.id='$id'");
 	$post = $result[0];
@@ -13,17 +13,14 @@ if (isset($_GET['id'])) {
 	$comments = sqlQuery("SELECT comments.*, users.username FROM comments JOIN users on comments.user_id = users.id and comments.post_id='$id'");
 }
 
+print "<h1>POST</h1>";
 
-?>
-
-<h1>POST</h1>
-<?php 
 if ($post['nsfw'] == true) {
 	print "NSFW <br>";
 }
 
 print "<h4 class='post_title'><a href='" . $post['link'] .  "'>" . $post['title'] . "</a></h4>";
-print "Av " . $post['username'] . " den " . $post['post_date'];
+print "Av <a href='index.php?p=profile&u={$post['username']}'>{$post['username']}</a> den " . $post['post_date'];
 print "<p class='single-post content'>"; 
 print $post['content']; 
 print "</p>";
@@ -47,15 +44,11 @@ if (isLoggedIn()) {
 	print "<a href='index.php?p=login'>Logga in</a> för att kommentera";
 }
 
-?>
-
-
-<?php 
 print "<hr>";
 print "<pre>";
 
 foreach ($comments as $comment) {
-	print $comment['username'];
+	print "<a href='index.php?p=profile&u={$comment['username']}'>{$comment['username']}</a>";
 	print "<br>";
 	print $comment['content'];
 	print "<hr>";

@@ -54,3 +54,30 @@ header nav {
 	clear: both;
 	padding: 20px 0;
 }
+
+.postbox {
+}
+
+.uparrow, .downarrow {
+	width: 31px;
+	height: 27px;
+	overflow: hidden;
+	position: relative;
+}
+.uparrow {
+	background: url("../img/uparrow.png") 0 0;
+}
+.uparrow:hover {
+	background: url("../img/uparrow.png") 0 -27px;
+	cursor: pointer;
+}
+
+
+.downarrow {
+	margin-top: 10px;
+	background: url("../img/downarrow.png") 0 0;
+}
+.downarrow:hover {
+	background: url("../img/downarrow.png") 0 -27px;
+	cursor: pointer;
+}

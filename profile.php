@@ -10,9 +10,20 @@ if (isset($_GET['u'])) {
 	$result = sqlQuery("SELECT * FROM users WHERE username='$u'");
 	$user = $result[0];
 
+	$ownProfile = false;
+	if (isLoggedIn()) {
+		if ($_SESSION['user']['id']==$user['id']) {
+			$ownProfile = true;
+		}
+	}
+
+	if ($ownProfile) {
+		print "<input type='button' value='Byt profilbild'>";
+	}
+
 	print $user['username'];
 	print "<br>";
-	print "Medlem sedan: " . $user['account_date'];
+	print "Medlem sedan: " . substr($user['account_date'], 0, 10);
 	print "<hr>";
 
 	print "<h5>Senaste posterna:</h5>";

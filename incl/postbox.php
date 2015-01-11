@@ -1,14 +1,20 @@
-<?php
+<div class="postbox row">
 
-print "<img src='img/uparrow.png'>";
-print "<img src='img/downarrow.png'>";
-if ($post['nsfw']) {
-	print " ";
-	print "NSFW";
-}
-print "<h4 class='post_title'><a href='" . $post['link'] .  "'>" . $post['title'] . "</a></h4>";
-print $post['username'];
+	<div class="col-2">
+		<div class="uparrow"></div>
+		<div class="downarrow"></div>
+		<?php
+			if ($post['nsfw']) {
+				print "NSFW";
+			}
+		?>
+	</div>
+	<div class="col-10">
+		<h4 class='post_title'><a href='<?php print $post['link']; ?>'><?php print $post['title']; ?></a></h4>
+		Av: <?php print "<a href='index.php?p=profile&u={$post['username']}'>{$post['username']}</a>"; ?>
 
-print "<br>";
-print "<a href='index.php?p=post&id={$post['id']}'>Kommentarer</a>";
-print "<hr>";
+		<br>
+		<a href='index.php?p=post&id=<?php print $post['id']; ?>'>Kommentarer</a>
+	</div>
+</div>
+<hr>

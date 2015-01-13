@@ -17,9 +17,13 @@ if (isset($_GET['u'])) {
 		}
 	}
 
-	if ($ownProfile) {
-		print "<input type='button' value='Byt profilbild'>";
-	}
+	if ($ownProfile) : ?>
+		<form enctype='multipart/form-data' action='forms/profilepicture.php' method='post'>
+		<input name='uploadedPicture' type='file'><br>
+		<input type='submit' value='Byt profilbild'>
+		</form>
+	
+	<?php endif;
 
 	print $user['username'];
 	print "<br>";

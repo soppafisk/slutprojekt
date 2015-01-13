@@ -60,3 +60,16 @@ function isLoggedIn() {
 	else 
 		return false;
 }
+
+//////////////////////////////////////////////////////////////////
+/// Returns a string with random a-z, 0-9
+function randomString($length = 10) {
+	$letters = array_merge(range("a", "z"), range(0, 9));
+	$string = "";
+
+	for ($i = 0; $i < $length; $i++) {
+		$letter = array_rand($letters);
+		$string .= $letters[$letter];
+	}
+	return $string;
+}

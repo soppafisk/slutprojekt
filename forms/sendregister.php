@@ -41,13 +41,13 @@ if (mysqli_errno($db)) {
 	}
 }
 
+// Password check
 if (strlen($password) < 6) {
 	$_SESSION['feedback'] = ['color'=>'red', 'message'=>'Lösenorden måste vara minst 6 tecken långt'];
 	header($location);
 	die;
 }
 
-// Password is repeated
 if ($password != $password2) {
 	$_SESSION['feedback'] = ['color'=>'red', 'message'=>'Lösenorden måste vara likadana'];
 	header($location);

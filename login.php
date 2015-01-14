@@ -2,9 +2,10 @@
 
 
 require "incl/header.php";
-
+$username = "";
 if (isset($_SESSION['feedback'])) {
 	print $_SESSION['feedback']['message'];
+	$username = $_SESSION['feedback']['username'];
 	unset($_SESSION['feedback']);
 }
 ?>
@@ -13,8 +14,10 @@ if (isset($_SESSION['feedback'])) {
 	<h2>Logga in</h2>
 
 	<form id="loginform" action="forms/sendlogin.php" method="POST">
-		<label for="username">Användarnamn: </label><input type="text" name="username">
-		<label for="password">Lösenord: </label><input type="password" name="password">
+		<label for="username">Användarnamn: </label>
+		<input type="text" name="username" value='<?php print $username; ?>' >
+		<label for="password">Lösenord: </label>
+		<input type="password" name="password">
 		<input type="submit" value="Logga in">
 	</form>
 

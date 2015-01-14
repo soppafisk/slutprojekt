@@ -23,9 +23,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		$_SESSION['feedback']['title'] = "Titeln måste vara minst 3 tecken lång";
 	}
 
-	if (filter_var($_POST['link'], FILTER_VALIDATE_URL)) 
+	if (filter_var($_POST['link'], FILTER_VALIDATE_URL)) {
+		$doesExist = sqlQuery("SELECT * FROM posts WHERE link='{$_POST['link']}'");
+		if ($doesExist == true) {
+			$error = true;
+			$_SESSION['feedback']['link'] = "Länken är redan postad. Hitta en ny!";
+		}
 		$link = $_POST['link'];
-	else {
+	} else {
 		$error = true;
 		$_SESSION['feedback']['link'] = "Du måste ange en riktig länk. Glöm inte http:// och sånt";
 	}

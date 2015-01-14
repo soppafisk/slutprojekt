@@ -86,3 +86,27 @@ header nav {
 .profilePicture {
 	max-width: 200px;
 }
+
+
+/* PAGINATION */
+.pagination div {
+	float: left;
+	min-height: 1px;
+}
+
+.rightPag {
+	float: right;
+}
+
+.nrPag {
+	text-align: center;
+}
+
+.nrPag a {
+	margin: 4px;
+}
+
+.bold {
+	font-weight: bold;
+}
+

@@ -13,11 +13,14 @@ $user = dbQuery($query);
 
 if (password_verify($password, $user[0]['password'])) {
 	$_SESSION['user'] = $user[0];
-	print "va?!";
 	header('Location: ../index.php');
 	die;
 } else {
-	$_SESSION['feedback'] = ['color' => 'red', 'message' =>'Användarnamnet eller lösenordet är fel'];
+	$_SESSION['feedback'] = [
+		'color' => 'red', 
+		'message' =>'Användarnamnet eller lösenordet är fel'
+	];
+	$_SESSION['feedback']['username'] = $username; 
 	header('Location: ../index.php?p=login');
 	die;
 }

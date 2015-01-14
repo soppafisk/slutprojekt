@@ -32,7 +32,7 @@ function dbQuery($query) {
 }
 
 ////////////////////////////////////////////////////////////////////
-/// Send query to db, return data[]
+/// Send SELECT query to db, return data[]
 function sqlQuery($query) {
 	$mysqli = new mysqli(SERVERNAME, USERNAME, PASSWORD, DATABASE);
 
@@ -72,4 +72,16 @@ function randomString($length = 10) {
 		$string .= $letters[$letter];
 	}
 	return $string;
+}
+
+/////////////////////////////////////////////////////////////////
+/// randomizes new name for file, checks if exists. Recursive. 
+function newNameForProfilePicture($imageFileType) {
+	$newName = randomString() . "." . $imageFileType;
+
+	if (file_exists($newName . "." . $imageFileType)) {
+		newNameForProfilePicture($imageFileType);
+	}
+	return $newName;
+
 }

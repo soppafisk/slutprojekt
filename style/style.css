@@ -81,3 +81,8 @@ header nav {
 	background: url("../img/downarrow.png") 0 -27px;
 	cursor: pointer;
 }
+
+
+.profilePicture {
+	max-width: 200px;
+}

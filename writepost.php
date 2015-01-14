@@ -7,7 +7,7 @@
 	<form action="posts/postsend.php" method="POST">
 		<label for="title">Titel:<br></label>
 		<input type="text" name="title">
-		<label for="link">Länk:<br></label>
+		<label for="link">Länk: (glöm inte http://)<br></label>
 		<input type="text" name="link">
 		<label for="content">Beskrivning:<br></label>
 		<textarea name="content" cols="30" rows="10"></textarea>

@@ -19,16 +19,23 @@ if (isset($_GET['u'])) {
 
 	if ($ownProfile) : ?>
 		<form enctype='multipart/form-data' action='forms/profilepicture.php' method='post'>
-		<input name='uploadedPicture' type='file'><br>
-		<input type='submit' value='Byt profilbild'>
+			<input name='uploadedPicture' type='file'><br>
+			<input type='submit' value='Byt profilbild'> (Bilden får vara max 5MB)
 		</form>
 	
-	<?php endif;
+	<?php
+		if (isset($_SESSION['feedback'])) {
+			print $_SESSION['feedback']['message'] . "<br>";
+			unset($_SESSION['feedback']);
+		}
+	endif;
 
 	print $user['username'];
 	print "<br>";
+	print "<img src='img/profiles/" . $user['profilePicture'] . "' class='profilePicture' alt='profilbild'>";
 	print "Medlem sedan: " . substr($user['account_date'], 0, 10);
 	print "<hr>";
+
 
 	print "<h5>Senaste posterna:</h5>";
 

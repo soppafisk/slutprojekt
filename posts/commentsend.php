@@ -15,6 +15,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 	$stmt = $mysqli->prepare("INSERT INTO comments (user_id, post_id, content) VALUES (?, ?, ?)");
 	$stmt->bind_param('iis', $user_id, $post_id, $content);
 
+
+	// VALIDATION
 	if (strlen($_POST['content']) <= 2000 && strlen($_POST['content']) > 3) {
 		$content = $mysqli->real_escape_string($_POST['content']);
 	} else {

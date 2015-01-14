@@ -4,6 +4,8 @@ require "../functions/functions.php";
 
 session_start();
 
+$location = 'Location: ../index.php?p=register';
+
 $db = mysqli_connect(SERVERNAME, USERNAME, PASSWORD, DATABASE);
 
 if (mysqli_connect_errno($db)) {
@@ -17,26 +19,38 @@ $password 	= mysqli_real_escape_string($db, $_POST['password']);
 $password2 	= mysqli_real_escape_string($db, $_POST['password2']);
 $email 		= mysqli_real_escape_string($db, $_POST['email']);
 
+if (strlen($username) < 3) {
+	$_SESSION['feedback'] = ['color'=>'red', 'message'=>'Användarnamnet måste vara minst 3 tecken'];
+	header($location);
+	die;
+}
+
 //check if user exists
 $query = sprintf("SELECT username FROM users where username='%s'", $username);
 
 $result = mysqli_query($db, $query);
 if (mysqli_errno($db)) {
-	$_SESSION['feedback'] = ['color'=>'red', 'message'=>'Registreringen misslyckades '];
-	header('Location: ../index.php?p=register');
+	$_SESSION['feedback'] = ['color'=>'red', 'message'=>'Registreringen misslyckades.'];
+	header($location);
 	die;
 } else {
 	if (mysqli_num_rows($result)>0) {
 		$_SESSION['feedback'] = ['color'=>'red', 'message'=>'Användarnamet är upptaget'];
-		header('Location: ../index.php?p=register');
+		header($location);
 		die;
 	}
+}
+
+if (strlen($password) < 6) {
+	$_SESSION['feedback'] = ['color'=>'red', 'message'=>'Lösenorden måste vara minst 6 tecken långt'];
+	header($location);
+	die;
 }
 
 // Password is repeated
 if ($password != $password2) {
 	$_SESSION['feedback'] = ['color'=>'red', 'message'=>'Lösenorden måste vara likadana'];
-	header('Location: ../index.php?p=register');
+	header($location);
 	die;
 }
 
@@ -48,11 +62,10 @@ $result = mysqli_query($db, $query);
 
 if (mysqli_errno($db)) {
 	$_SESSION['feedback'] = ['color'=>'red', 'message'=>'Registreringen misslyckades '];
-	header('Location: ../index.php?p=register');
+	header($location);
 	die;
 } else {
 	$_SESSION['feedback'] = ['color'=>'green', 'message'=>'Registreringen lyckades'];
 	header('Location: ../index.php?p=login');
 	die;
 }
-

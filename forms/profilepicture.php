@@ -13,6 +13,7 @@ if (!empty($_FILES['uploadedPicture'])) {
 		$target_dir = "../img/profiles/";
 		$imageFileType = pathinfo($name, PATHINFO_EXTENSION);
 
+		// Validation
 		if ($picture['error'] == 0) {
 			$check = getimagesize($tmp);
 
@@ -35,6 +36,7 @@ if (!empty($_FILES['uploadedPicture'])) {
 			} else {
 				$newName = newNameForProfilePicture($imageFileType);
 			
+				// Update database
 				if (move_uploaded_file($tmp, $target_dir . $newName)) {
 						$mysqli = new mysqli(SERVERNAME, USERNAME, PASSWORD, DATABASE);
 						$query = "UPDATE users SET profilePicture='$newName' WHERE id='{$_SESSION['user']['id']}'";

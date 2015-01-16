@@ -17,8 +17,6 @@
 			print "<a href='index.php?cat=" . $category['name'] . "'>" . $category['fullName'] . "</a>";
 		}
 		print "</nav>";
-		print "<pre>";
-		print_r($currentCat);
 
 		?>
 
@@ -34,7 +32,11 @@
 		} else {
 			$currentPage = 1;
 		}
-		$postCount = sqlQuery("SELECT COUNT(*) FROM posts WHERE cat_id='" . $currentCat['id'] . "'")[0]["COUNT(*)"];
+		$catQuery = "";
+		if ($currentCat['name'] != "all")
+			$catQuery = " WHERE cat_id='" . $currentCat['id'] . "'";
+
+		$postCount = sqlQuery("SELECT COUNT(*) FROM posts" . $catQuery)[0]["COUNT(*)"];
 		$postsPerPage = 5;
 		$pages = ceil($postCount / $postsPerPage);
 		$offset = $postsPerPage * ($currentPage-1);
@@ -58,18 +60,14 @@
 			include "incl/postbox.php";
 		}
 
-
-		$params = array_merge($_GET, array("page" => $currentPage-1));
-
-		$new_query_string = http_build_query($params);
-		print $new_query_string;
-
 		// Pagination links
 		print "<div class='row pagination'>";
 		print "<div class='col-3'>";
-		if ($currentPage <= $pages && $currentPage > 1)
-			print "<a href='index.php?page=" . ($currentPage-1) . "' class='leftPag'>Föregående sida</a>";
-		
+		if ($currentPage <= $pages && $currentPage > 1) {
+			$params = array_merge($_GET, array("page" => $currentPage-1));
+			$new_query_string = http_build_query($params);
+			print "<a href='index.php?page=" . $new_query_string . "' class='leftPag'>Föregående sida</a>";
+		}
 		print "</div>";
 		print "<div class='col-6 nrPag'>";
 		
@@ -82,8 +80,11 @@
 		}
 		print "</div>";
 		print "<div class='col-3'>";
-		if ($currentPage < $pages)
-			print "<a href='index.php?page=" . ($currentPage+1) . "' class='rightPag'>Nästa sida</a>";
+		if ($currentPage < $pages) {
+			$params = array_merge($_GET, array("page" => $currentPage+1));
+			$new_query_string = http_build_query($params);
+			print "<a href='index.php?page=" . $new_query_string . "' class='rightPag'>Nästa sida</a>";
+		}
 		print "</div>";
 		print "</div>";
 		?>

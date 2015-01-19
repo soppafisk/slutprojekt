@@ -17,7 +17,7 @@
 
 <div id="hwrapper">
 	<header>
-		<a href="index.php"><img src="img/logo.png" alt="logo"></a>
+		<a href="index.php"><img src="img/logo.png" alt="logo" id="logo"></a>
 		<nav id="headernav">
 			<a href="index.php">Hem</a>
 			<?php

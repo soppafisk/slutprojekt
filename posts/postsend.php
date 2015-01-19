@@ -16,7 +16,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 	$stmt->bind_param('ssssii', $title, $link, $content, $nsfw, $user_id, $cat_id);
 
 	// VALIDATION
-	$cat_id = $_POST['category'];
+	$cat_id = $mysqli->real_escape_string($_POST['category']);
+	if ($cat_id == 0 ||  !ctype_digit($cat_id)) {
+		$error = true;
+		$_SESSION['feedback']['category'] = "Välj en kategori";
+	}
 
 	if (strlen($_POST['title']) > 2) {
 		$title 	= $mysqli->real_escape_string($_POST['title']);

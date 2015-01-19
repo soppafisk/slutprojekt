@@ -81,7 +81,7 @@
 		if ($currentPage < $pages) {
 			$params = array_merge($_GET, array("page" => $currentPage+1));
 			$new_query_string = http_build_query($params);
-			print "<a href='index.php?page=" . $new_query_string . "' class='rightPag'>Nästa sida</a>";
+			print "<a href='index.php?" . $new_query_string . "' class='rightPag'>Nästa sida</a>";
 		}
 		print "</div>";
 		print "</div>";

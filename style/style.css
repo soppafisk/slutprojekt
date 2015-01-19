@@ -22,7 +22,7 @@ h1,h2,h3,h4,h5,h6 {
 #hwrapper {
 	width: 100%;
 	background: #AED581;
-	height: 70px;
+	height: 90px;
 	clear: both;
 	position: relative;
 	z-index: 10;
@@ -42,8 +42,12 @@ header img {
 
 header nav {
 	float: right;
-	margin-top: 40px;
+	margin-top: 60px;
 	padding:0 10px;
+}
+
+header #logo {
+	margin: 5px;
 }
 
 #catNav a {

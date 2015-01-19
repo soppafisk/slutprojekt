@@ -28,6 +28,9 @@ if (isset($_GET['p'])) {
 		case 'writepost':
 			require "writepost.php";
 			break;
+		case 'search':
+			require "search.php";
+			break;
 		case 'list':
 		default:
 			require "list.php";

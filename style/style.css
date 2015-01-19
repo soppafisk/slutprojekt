@@ -46,6 +46,10 @@ header nav {
 	padding:0 10px;
 }
 
+#catNav a {
+	margin: 5px;
+}
+
 #wrapper {
 	width: 960px;
 	margin: 0 auto;
@@ -64,24 +68,25 @@ header nav {
 	overflow: hidden;
 	position: relative;
 }
+
 .uparrow {
 	background: url("../img/uparrow.png") 0 0;
 }
+
 .uparrow:hover {
 	background: url("../img/uparrow.png") 0 -27px;
 	cursor: pointer;
 }
 
-
 .downarrow {
 	margin-top: 10px;
 	background: url("../img/downarrow.png") 0 0;
 }
+
 .downarrow:hover {
 	background: url("../img/downarrow.png") 0 -27px;
 	cursor: pointer;
 }
-
 
 .profilePicture {
 	max-width: 200px;
@@ -106,6 +111,8 @@ header nav {
 	margin: 4px;
 }
 
+
+/* General */
 .bold {
 	font-weight: bold;
 }

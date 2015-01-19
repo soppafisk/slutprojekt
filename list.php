@@ -41,8 +41,6 @@
 		$pages = ceil($postCount / $postsPerPage);
 		$offset = $postsPerPage * ($currentPage-1);
 
-
-
 		// The feed
 		$catQuery = "";
 		if ($currentCat['name'] != "all")

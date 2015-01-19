@@ -16,6 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 	$stmt->bind_param('ssssii', $title, $link, $content, $nsfw, $user_id, $cat_id);
 
 	// VALIDATION
+	$cat_id = $_POST['category'];
+
 	if (strlen($_POST['title']) > 2) {
 		$title 	= $mysqli->real_escape_string($_POST['title']);
 	} else {
@@ -48,8 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		$nsfw = false;
 
 	$user_id = $_SESSION['user']['id'];
-	$cat_id = 1;
-
+	
 	if (!$error) {
 		if (!$stmt->execute()) {
 			print $mysqli->error;

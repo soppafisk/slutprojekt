@@ -1,10 +1,32 @@
 <?php require_once "incl/header.php"; ?>
 
 <div class="col-8">
-<?php if (isLoggedIn()): ?>
+<?php if (isLoggedIn()): 
+	$categories = sqlQuery("SELECT * FROM categories");
+	$currentCat = 0;
+?>
 
 	<h1>Skriv inlägg</h1>
 	<form action="posts/postsend.php" method="POST">
+		<label for="category">Kategori:<br></label>
+		<select name="category">
+			<option value="0"> </option>
+			<?php 
+				foreach ($categories as $category) {
+					$selected = false;
+					if (isset($_GET['cat'])) {
+						if (in_array($_GET['cat'], $category)) {
+							$currentCat = $category;
+							$selected = true;
+						}
+					}
+					print "<option value='{$category['id']}'";
+					if ($selected) 
+						print " selected ";
+					print ">{$category['fullName']}</option>";
+				}
+			?>
+		</select><br>
 		<label for="title">Titel:<br></label>
 		<input type="text" name="title">
 		<label for="link">Länk: (glöm inte http://)<br></label>

@@ -25,7 +25,6 @@ print "<p class='single-post content'>";
 print $post['content']; 
 print "</p>";
 
-
 if (isLoggedIn()) {
 	print "(Inloggad som " . $_SESSION['user']['username'] . ")";
 	$_SESSION['commentOnPost'] = $post['id'];

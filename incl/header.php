@@ -20,6 +20,7 @@
 		<a href="index.php"><img src="img/logo.png" alt="logo" id="logo"></a>
 		<nav id="headernav">
 			<a href="index.php">Hem</a>
+			<a href='index.php?p=search'>Sök</a>
 			<?php
 			if (isLoggedIn()) {
 				print "<a href='index.php?p=writepost'>Skriv inlägg</a> ";

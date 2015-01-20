@@ -1,4 +1,3 @@
-
 function search() {
 	var xmlhttp = new XMLHttpRequest();
 
@@ -16,7 +15,5 @@ function search() {
 
 var searchField = searchForm.searchField;
 var searchSpan = document.getElementById('searchSpan');
-
-var searchBtn = searchForm.searchBtn;
 
 searchField.addEventListener('keyup', search);

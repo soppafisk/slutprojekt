@@ -26,15 +26,17 @@
 	<div class="col-8">
 		<h1>Lista/index</h1>
 		<?php
-			// Pagination
+		// Selected category into query
+		$catQuery = "";
+		if ($currentCat['name'] != "all")
+			$catQuery = " WHERE cat_id='" . $currentCat['id'] . "'";
+
+		// Pagination
 		if (isset($_GET['page']) && ctype_digit($_GET['page'])) {
 			$currentPage = $_GET['page'];
 		} else {
 			$currentPage = 1;
 		}
-		$catQuery = "";
-		if ($currentCat['name'] != "all")
-			$catQuery = " WHERE cat_id='" . $currentCat['id'] . "'";
 
 		$postCount = sqlQuery("SELECT COUNT(*) FROM posts" . $catQuery)[0]["COUNT(*)"];
 		$postsPerPage = 5;
@@ -42,15 +44,25 @@
 		$offset = $postsPerPage * ($currentPage-1);
 
 		// The feed
+		$where = "";
+		$order = " ORDER BY score DESC ";
+
 		$catQuery = "";
 		if ($currentCat['name'] != "all")
 			$catQuery = "AND cat_id='" . $currentCat['id'] . "'";
 
 		$result = sqlQuery(
-			"SELECT posts.*, users.username 
+			"SELECT posts.*, users.username, score 
 			FROM `posts` 
-			JOIN users on posts.user_id = users.id
+			INNER JOIN users 
+			ON posts.user_id = users.id 
+			LEFT JOIN 
+				(SELECT post_id, (SUM(coalesce(value,0))) as score 
+				FROM votes GROUP BY post_id) v 
+			ON posts.id = v.post_id
 			$catQuery
+			$where
+			$order 
 			LIMIT $offset , $postsPerPage"
 		);
 

@@ -1,8 +1,8 @@
 <div class="postbox row">
 
 	<div class="col-2">
-		<div class="uparrow <?php print "post_" . $post['id']; ?>"></div>
-		<div class="downarrow <?php print "post_" . $post['id']; ?>"></div>
+		<div class="up arrow <?php print "post_" . $post['id']; ?>"></div>
+		<div class="down arrow <?php print "post_" . $post['id']; ?>"></div>
 		<?php
 			if ($post['nsfw']) {
 				print "NSFW";

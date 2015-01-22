@@ -67,28 +67,28 @@ header #logo {
 .postbox {
 }
 
-.uparrow, .downarrow {
+.up.arrow, .down.arrow {
 	width: 31px;
 	height: 27px;
 	overflow: hidden;
 	position: relative;
 }
 
-.uparrow {
+.up.arrow {
 	background: url("../img/uparrow.png") 0 0;
 }
 
-.uparrow:hover {
+.up.arrow:hover {
 	background: url("../img/uparrow.png") 0 -27px;
 	cursor: pointer;
 }
 
-.downarrow {
+.down.arrow {
 	margin-top: 10px;
 	background: url("../img/downarrow.png") 0 0;
 }
 
-.downarrow:hover {
+.down.arrow:hover {
 	background: url("../img/downarrow.png") 0 -27px;
 	cursor: pointer;
 }
@@ -121,4 +121,3 @@ header #logo {
 .bold {
 	font-weight: bold;
 }
-

@@ -18,7 +18,7 @@ $post_id = filter_var(substr($post_id, 5), FILTER_SANITIZE_NUMBER_INT);
 
 $hasVoted = sqlQuery("SELECT * FROM votes WHERE post_id='$post_id' AND user_id='" . $_SESSION['user']['id'] . "'");
 
-if (!$hasVoted) {
+if (!$hasVoted && isLoggedIn()) {
 	$query = "INSERT INTO votes (user_id, post_id, value) VALUES ('" . $_SESSION['user']['id'] . "', '" . $post_id . "', '" . $upordown . "')";
 
 	$mysqli = new mysqli(SERVERNAME, USERNAME, PASSWORD, DATABASE);

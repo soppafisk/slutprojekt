@@ -66,7 +66,7 @@
 		// order query
 		$sortings = [
 			1 => " ORDER BY score DESC ",
-			2 => " ORDER BY post_date "
+			2 => " ORDER BY post_date DESC "
 			];
 
 		$order = $sortings['1'];
@@ -76,7 +76,7 @@
 		}
 
 		$result = sqlQuery(
-			"SELECT posts.*, users.username, score 
+			"SELECT posts.*, users.username, score, yourvote.value
 			FROM `posts` 
 			INNER JOIN users 
 			ON posts.user_id = users.id 
@@ -84,6 +84,10 @@
 				(SELECT post_id, (SUM(coalesce(value,0))) as score 
 				FROM votes GROUP BY post_id) v 
 			ON posts.id = v.post_id
+			LEFT JOIN 
+				(SELECT post_id, value FROM votes
+				WHERE user_id = '" . $_SESSION['user']['id'] . "') yourvote
+			ON posts.id = yourvote.post_id 
 			$catQuery
 			$where
 			$order 
@@ -115,7 +119,7 @@
 		print "</div>";
 		print "<div class='col-3'>";
 		if ($currentPage < $pages) {
-			$params = array_merge($_GET, array("page" => $currentPage+1));
+			$params = array_merge($_GET, ["page" => $currentPage+1]);
 			$new_query_string = http_build_query($params);
 			print "<a href='index.php?" . $new_query_string . "' class='rightPag'>Nästa sida</a>";
 		}

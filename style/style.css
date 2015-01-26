@@ -93,6 +93,10 @@ header #logo {
 	cursor: pointer;
 }
 
+.arrow.hasVoted {
+	background: #F00;
+}
+
 .profilePicture {
 	max-width: 200px;
 }

@@ -67,6 +67,11 @@ header #logo {
 .postbox {
 }
 
+.profilePicture {
+	max-width: 200px;
+}
+
+/* Voting */
 .up.arrow, .down.arrow {
 	width: 31px;
 	height: 27px;
@@ -93,13 +98,22 @@ header #logo {
 	cursor: pointer;
 }
 
-.arrow.hasVoted {
-	background: #F00;
+.arrow.up.hasVoted, .arrow.up.hasVoted:hover {
+	background: url("../img/greyarrow.png") 0 0px;
 }
 
-.profilePicture {
-	max-width: 200px;
+
+.arrow.down.hasVoted, .arrow.down.hasVoted:hover {
+	background: url("../img/greyarrow.png") 0 0px;
+	-moz-transform: scaleY(-1);
+    -o-transform: scaleY(-1);
+    -webkit-transform: scaleY(-1);
+    transform: scaleY(-1);
+    filter: FlipV;
+    -ms-filter: "FlipV";
 }
+
+
 
 
 /* PAGINATION */
@@ -119,7 +133,6 @@ header #logo {
 .nrPag a {
 	margin: 4px;
 }
-
 
 /* General */
 .bold {

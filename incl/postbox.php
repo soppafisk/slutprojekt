@@ -4,13 +4,15 @@
 
 		<?php 
 			$hasVoted = "";
-			if ($post['value'] == 1 || $post['value'] == -1)
-				$hasVoted = "hasVoted";
-			?>
-		<div class="up arrow <?php print $hasVoted . " post_" . $post['id']; ?>"></div>
+			if (isset($post['value']) && ($post['value'] == 1 || $post['value'] == -1))
+				$hasVoted = "hasVoted_" . $post['value'];
+		?>
+
+		<div class="up arrow <?php print "post_" . $post['id'] . " $hasVoted"; ?>"></div>
 		<div class="score"><?php $post['score'] !== null ? print $post['score'] : print "Inga röster";?></div>
-		<div class="down arrow <?php print $hasVoted . " post_" . $post['id']; ?>"></div>
+		<div class="down arrow <?php print "post_" . $post['id'] . " $hasVoted"; ?>"></div>
 		<?php
+		print $post['value'];
 			if ($post['nsfw']) {
 				print "NSFW";
 			}

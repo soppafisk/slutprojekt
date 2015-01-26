@@ -1,13 +1,12 @@
 <?php require "incl/header.php"; ?>
 <div class="row">
 	<div class="col-8">
-		<?php 
+		<!--- Category Menu -->
+		<nav id='catNav'>
+		<a href='index.php?cat=all'>Allt</a>
+		<?php
 		$currentCat = ["id" => "%", "name" => "all", "fullName" => "Allt"];
 		$categories = sqlQuery("SELECT * FROM categories");
-
-		// Category Menu
-		print "<nav id='catNav'>";
-		print "<a href='index.php?cat=all'>Allt</a>";
 		foreach ($categories as $category) {
 			if (isset($_GET['cat'])) {
 				if (in_array($_GET['cat'], $category)) {
@@ -16,20 +15,24 @@
 			}
 			print "<a href='index.php?cat=" . $category['name'] . "'>" . $category['fullName'] . "</a>";
 		}
-		print "</nav>";
-
+		?>
+		</nav>
+		<!--- Order By Menu -->
+		<?php 
+		// Sort by
+		$sortings = [
+			1 => ["name" => "Heta", "query" => " ORDER BY score DESC "],
+			2 => ["name" => "Nya", "query" => " ORDER BY post_date DESC "]
+			];
 		?>
 		<div class="orderNav">
-			<?php 
-				$new_query_string = http_build_query(["cat" => $currentCat['name'], "order" => 1]);			
+			<?php
+			foreach ($sortings as $sorting => $values) {
+				$new_query_string = http_build_query(["cat" => $currentCat['name'], "order" => $sorting]);
+				print "<a href='index.php?" . $new_query_string . "'>" . $values['name'] . "</a>";
+			}
 			?>
-			<a href="<?php print "index.php?" . $new_query_string; ?>">Heta</a>
-			<?php 
-				$new_query_string = http_build_query(["cat" => $currentCat['name'], "order" => 2]);			
-			?>
-			<a href="<?php print "index.php?" . $new_query_string; ?>">Nya</a>
 		</div>
-
 	</div>
 </div>
 <div class="row">
@@ -48,51 +51,43 @@
 			$currentPage = 1;
 		}
 
-		$postCount = sqlQuery("SELECT COUNT(*) FROM posts" . $catQuery)[0]["COUNT(*)"];
+		$postCount = sqlQuery("SELECT COUNT(*) as counter FROM posts" . $catQuery)[0]["counter"];
 		$postsPerPage = 5;
 		$pages = ceil($postCount / $postsPerPage);
 		$offset = $postsPerPage * ($currentPage-1);
 
 		// The feed
 
-		// category query
-		/*$catQuery = "";
-		if ($currentCat['name'] != "all")
-			$catQuery = "AND cat_id='" . $currentCat['id'] . "'"; */
-
-		// where query
-		$where = "";
+		// Building the query
+		$query = "SELECT posts.*, users.username, score ";
+		if (isLoggedIn())
+			$query .= ", yourvote.value ";
+		$query .= "FROM `posts`";
 		
-		// order query
-		$sortings = [
-			1 => " ORDER BY score DESC ",
-			2 => " ORDER BY post_date DESC "
-			];
-
-		$order = $sortings['1'];
-
-		if (isset($_GET['order']) && array_key_exists($_GET['order'], $sortings)) {
-			$order = $sortings[$_GET['order']];
-		}
-
-		$result = sqlQuery(
-			"SELECT posts.*, users.username, score, yourvote.value
-			FROM `posts` 
-			INNER JOIN users 
+		$query .= "INNER JOIN users 
 			ON posts.user_id = users.id 
 			LEFT JOIN 
 				(SELECT post_id, (SUM(coalesce(value,0))) as score 
 				FROM votes GROUP BY post_id) v 
-			ON posts.id = v.post_id
-			LEFT JOIN 
+			ON posts.id = v.post_id ";
+		if (isLoggedIn())
+			$query .= "LEFT JOIN 
 				(SELECT post_id, value FROM votes
 				WHERE user_id = '" . $_SESSION['user']['id'] . "') yourvote
-			ON posts.id = yourvote.post_id 
-			$catQuery
-			$where
-			$order 
-			LIMIT $offset , $postsPerPage"
-		);
+				ON posts.id = yourvote.post_id ";
+
+		$singleUserQuery = "WHERE user_id = 4 "; 
+		$query .= $catQuery . $singleUserQuery;
+		if (isset($_GET['order']) && array_key_exists($_GET['order'], $sortings)) {
+			$query .= $sortings[$_GET['order']]['query'];
+		} else {
+			$query .= $sortings['1']['query'];
+		}
+		$query .= "LIMIT $offset, $postsPerPage";
+
+		print $query;
+
+		$result = sqlQuery($query);
 
 		foreach ($result as $post) {
 			include "incl/postbox.php";

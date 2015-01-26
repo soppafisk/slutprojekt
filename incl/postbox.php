@@ -2,7 +2,7 @@
 
 	<div class="col-2">
 		<div class="up arrow <?php print "post_" . $post['id']; ?>"></div>
-		<div class="score"><?php print $post['score'];?></div>
+		<div class="score"><?php $post['score'] !== null ? print $post['score'] : print "Inga röster";?></div>
 		<div class="down arrow <?php print "post_" . $post['id']; ?>"></div>
 		<?php
 			if ($post['nsfw']) {

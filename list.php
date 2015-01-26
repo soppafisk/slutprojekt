@@ -19,6 +19,16 @@
 		print "</nav>";
 
 		?>
+		<div class="orderNav">
+			<?php 
+				$new_query_string = http_build_query(["cat" => $currentCat['name'], "order" => 1]);			
+			?>
+			<a href="<?php print "index.php?" . $new_query_string; ?>">Heta</a>
+			<?php 
+				$new_query_string = http_build_query(["cat" => $currentCat['name'], "order" => 2]);			
+			?>
+			<a href="<?php print "index.php?" . $new_query_string; ?>">Nya</a>
+		</div>
 
 	</div>
 </div>
@@ -44,12 +54,26 @@
 		$offset = $postsPerPage * ($currentPage-1);
 
 		// The feed
-		$where = "";
-		$order = " ORDER BY score DESC ";
 
-		$catQuery = "";
+		// category query
+		/*$catQuery = "";
 		if ($currentCat['name'] != "all")
-			$catQuery = "AND cat_id='" . $currentCat['id'] . "'";
+			$catQuery = "AND cat_id='" . $currentCat['id'] . "'"; */
+
+		// where query
+		$where = "";
+		
+		// order query
+		$sortings = [
+			1 => " ORDER BY score DESC ",
+			2 => " ORDER BY post_date "
+			];
+
+		$order = $sortings['1'];
+
+		if (isset($_GET['order']) && array_key_exists($_GET['order'], $sortings)) {
+			$order = $sortings[$_GET['order']];
+		}
 
 		$result = sqlQuery(
 			"SELECT posts.*, users.username, score 
@@ -76,7 +100,7 @@
 		if ($currentPage <= $pages && $currentPage > 1) {
 			$params = array_merge($_GET, array("page" => $currentPage-1));
 			$new_query_string = http_build_query($params);
-			print "<a href='index.php?page=" . $new_query_string . "' class='leftPag'>Föregående sida</a>";
+			print "<a href='index.php?" . $new_query_string . "' class='leftPag'>Föregående sida</a>";
 		}
 		print "</div>";
 		print "<div class='col-6 nrPag'>";

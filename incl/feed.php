@@ -29,7 +29,7 @@
 		<?php 
 		// Sort by
 		$sortings = [
-			1 => ["name" => "Heta", "query" => " AND post_date > now() - INTERVAL 24 HOUR ORDER BY post_date DESC "],
+			1 => ["name" => "Heta", "query" => " AND post_date > now() - INTERVAL 24 HOUR ORDER BY score DESC ", "countQuery" => " AND post_date > now() - INTERVAL 24 HOUR "],
 			2 => ["name" => "Heta all time", "query" => " ORDER BY score DESC "],
 			3 => ["name" => "Nya", "query" => " ORDER BY post_date DESC "],
 			];
@@ -68,9 +68,10 @@
 			$currentPage = 1;
 		}
 		$countQuery = "SELECT username, COUNT(*) as counter 
-		FROM posts JOIN users ON posts.user_id = users.id" . $catQuery . $singleUserQuery;
+			FROM posts JOIN users ON posts.user_id = users.id" . $catQuery . $singleUserQuery;
+		// best lazy fix ever
 		if ($orderQuery == $sortings['1']['query']) {
-			$countQuery .= $orderQuery;
+			$countQuery .= $sortings['1']['countQuery'];
 		}
 		print $countQuery;
 		$postCount = sqlQuery($countQuery)[0]["counter"];

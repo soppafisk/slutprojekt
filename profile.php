@@ -42,14 +42,9 @@ if (isset($_GET['u'])) {
 
 		print "<h5>Senaste posterna:</h5>";
 
-		$postCount = sqlQuery("SELECT COUNT(*) FROM posts WHERE user_id='" . $user['id'] . "'");
-		print($postCount[0]["COUNT(*)"]);
-
-		$posts = sqlQuery("SELECT posts.*, users.username FROM posts JOIN users ON posts.user_id=users.id and user_id='" . $user['id'] . "'");
-
-		foreach ($posts as $post) {
-			include "incl/postbox.php";
-		}
+		$singleUserQuery = " AND username = '$u'";
+		require "incl/feed.php";
+		
 	}
 } //get ['u']
 

@@ -12,7 +12,6 @@
 		<div class="score"><?php $post['score'] !== null ? print $post['score'] : print "Inga röster";?></div>
 		<div class="down arrow <?php print "post_" . $post['id'] . " $hasVoted"; ?>"></div>
 		<?php
-		print $post['value'];
 			if ($post['nsfw']) {
 				print "NSFW";
 			}

@@ -5,8 +5,6 @@ require "incl/header.php";
 $username = "";
 if (isset($_SESSION['feedback'])) {
 	print $_SESSION['feedback']['message'];
-	if (isset($_SESSION['feedback'])) 
-		$username = $_SESSION['feedback']['username'];
 	unset($_SESSION['feedback']);
 }
 ?>

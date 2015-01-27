@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		$content= $mysqli->real_escape_string($_POST['content']);
 	} else {
 		$error = true;
-		$_SESSION['feedback']['content'] = "Beskrivningen måste vara mellan 3 och 2000 tecken";
+		$_SESSION['feedback']['content'] = "Beskrivningen får vara högst 2000 tecken";
 	}
 
 	if (isset($_POST['nsfw'])) 

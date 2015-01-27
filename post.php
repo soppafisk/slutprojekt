@@ -15,6 +15,14 @@ if (isset($_GET['id'])) {
 
 print "<h1>POST</h1>";
 
+// If its your post, you 
+$adminPost = false;
+if (isLoggedIn()) {
+	if ($_SESSION['user']['id']==$post['user_id']) {
+		$adminPost = true;
+	}
+}
+
 if ($post['nsfw'] == true) {
 	print "NSFW <br>";
 }

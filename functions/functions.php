@@ -83,5 +83,4 @@ function newNameForProfilePicture($imageFileType) {
 		newNameForProfilePicture($imageFileType);
 	}
 	return $newName;
-
 }

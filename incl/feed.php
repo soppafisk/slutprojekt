@@ -116,6 +116,12 @@
 			$result = sqlQuery($query);
 
 			foreach ($result as $post) {
+				$ownPost = false;
+				if (isLoggedIn()) {
+					if ($_SESSION['user']['username'] == $post['username']){
+						$ownPost = true;
+					}
+				}
 				include "incl/postbox.php";
 			}
 

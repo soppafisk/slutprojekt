@@ -51,7 +51,6 @@
 </div>
 <div class="row">
 	<div class="col-8">
-		<h1><?php print $header; ?></h1>
 		<?php
 		// Selected category into query
 		$catQuery = " WHERE cat_id LIKE '%'";

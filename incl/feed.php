@@ -8,23 +8,26 @@
 		unset($params['order']);
 		$new_query_string = http_build_query($params);
 		
-		print "<a href='index.php?" . $new_query_string . "'>Allt</a>";
-		$currentCat = ["id" => "%", "name" => "all", "fullName" => "Allt"];
 		$categories = sqlQuery("SELECT * FROM categories");
+		$currentCat = $categories[0];
+
+		$activeClass = "class='active'";
 		foreach ($categories as $category) {
-			$activeClass = "";
 			if (isset($_GET['cat'])) {
 				if (in_array($_GET['cat'], $category)) {
 					$currentCat = $category;
 					$activeClass = "class='active'";
-				} 
-			}
+				} else {
+					$activeClass = "";
+				}
+			} 
+
 			$params = array_merge($_GET, ["cat" => $category['name']]);
 			unset($params['page']);
 			unset($params['order']);
 			$new_query_string = http_build_query($params);
 			print "<a $activeClass href='index.php?" . $new_query_string . "'>" . $category['fullName'] . "</a>";
-			//print "<a href='index.php?cat=" . $category['name'] . "'>" . $category['fullName'] . "</a>";
+			$activeClass = "";
 		}
 		?>
 		</nav>
@@ -32,18 +35,29 @@
 		<?php 
 		// Sort by
 		$sortings = [
-			1 => ["name" => "Heta", "query" => " AND post_date > now() - INTERVAL 48 HOUR ORDER BY score DESC ", "countQuery" => " AND post_date > now() - INTERVAL 24 HOUR "],
-			2 => ["name" => "Högsta poäng", "query" => " ORDER BY score DESC "],
+			1 => ["name" => "Högsta poäng", "query" => " ORDER BY score DESC "],
+			2 => ["name" => "Heta", "query" => " AND post_date > now() - INTERVAL 48 HOUR ORDER BY score DESC ", "countQuery" => " AND post_date > now() - INTERVAL 24 HOUR "],
 			3 => ["name" => "Nya", "query" => " ORDER BY post_date DESC "],
 			];
 		?>
+
 		<nav id="orderNav">
 			<?php
+			$activeOrder = "class='active'";
 			foreach ($sortings as $sorting => $values) {
+				
+				if (isset($_GET['order'])) {
+					if ($_GET['order'] == $sorting) {
+						$activeOrder = "class='active'";
+					} else {
+						$activeOrder = "";
+					}
+				}
 				$params = array_merge($_GET, ["cat" => $currentCat['name'], "order" => $sorting]);
 				unset($params['page']);
 				$new_query_string = http_build_query($params);
-				print "<a href='index.php?" . $new_query_string . "'>" . $values['name'] . "</a>";
+				print "<a $activeOrder href='index.php?" . $new_query_string . "'>" . $values['name'] . "</a>";
+				$activeOrder = "";
 			}
 			?>
 		</nav>
@@ -60,7 +74,7 @@
 		if (isset($_GET['order']) && array_key_exists($_GET['order'], $sortings)) {
 			$orderQuery = $sortings[$_GET['order']]['query'];
 		} else {
-			$orderQuery = $sortings['2']['query'];
+			$orderQuery = $sortings['1']['query'];
 		}
 
 		// Pagination
@@ -74,8 +88,8 @@
 		$countQuery = "SELECT username, COUNT(*) as counter 
 			FROM posts JOIN users ON posts.user_id = users.id" . $catQuery . $singleUserQuery;
 		// best lazy fix ever
-		if ($orderQuery == $sortings['1']['query']) {
-			$countQuery .= $sortings['1']['countQuery'];
+		if ($orderQuery == $sortings['2']['query']) {
+			$countQuery .= $sortings['2']['countQuery'];
 		}
 		
 		$postCount = sqlQuery($countQuery)[0]["counter"];

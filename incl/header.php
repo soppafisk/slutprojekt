@@ -14,7 +14,7 @@
 	<link rel="shortcut icon" href="favicon.png">
 	
 	<title>Trasig</title>
-	<script src="scripts/vote.js"></script>
+	<script src="scripts/scripts.js"></script>
 </head>
 
 <body>

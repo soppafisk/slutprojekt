@@ -5,12 +5,12 @@
 		<?php 
 			$hasVoted = "";
 			if (isset($post['value']) && ($post['value'] == 1 || $post['value'] == -1))
-				$hasVoted = "hasVoted_" . $post['value'];
+				$hasVoted = " hasVoted_" . $post['value'];
 		?>
 
-		<div class="up arrow <?php print "post_" . $post['id'] . " $hasVoted"; ?>"></div>
+		<div class="up arrow <?php print "post_" . $post['id'] . "$hasVoted"; ?>"></div>
 		<div class="score"><?php $post['score'] !== null ? print $post['score'] : print "Inga röster";?></div>
-		<div class="down arrow <?php print "post_" . $post['id'] . " $hasVoted"; ?>"></div>
+		<div class="down arrow <?php print "post_" . $post['id'] . "$hasVoted"; ?>"></div>
 		<?php
 			if ($post['nsfw']) {
 				print "NSFW";

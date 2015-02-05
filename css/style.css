@@ -1,3 +1,17 @@
+body {
+	background: #DCEDC8;
+	font-family: 'Open Sans', sans-serif;	
+	overflow-y: scroll;
+}
+
+.container {
+	background: white;
+}
+
+nav ul.pagination li {
+	text-align: center;
+}
+
 /* Voting */
 .up.arrow, .down.arrow {
 	width: 31px;

@@ -20,10 +20,12 @@
 
 <body>
 <div class="container">
-	<div id="hwrapper">
+	<div id="hwrapper" class="row">
 		<header>
-			<a href="index.php"><img src="img/logo.png" alt="logo" id="logo"></a>
-			<nav id="headernav">
+			<div class="col-xs-4">
+				<a href="index.php"><img src="img/logo.png" alt="logo" id="logo"></a>
+			</div>
+			<nav id="headernav" class="col-xs-4 col-xs-offset-4">
 				<a href="index.php">Hem</a>
 				<a href='index.php?p=search'>Sök</a>
 				<?php
@@ -36,7 +38,6 @@
 				}
 				?>
 			</nav>
-
 		</header>
 	</div>
 	<div id="wrapper">

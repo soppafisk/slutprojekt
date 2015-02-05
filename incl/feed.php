@@ -43,16 +43,18 @@
 
 		<nav id="orderNav">
 			<?php
-			$activeOrder = "class='active'";
+			$activeOrder = "active";
 			foreach ($sortings as $sorting => $values) {
-				
+							
 				if (isset($_GET['order'])) {
 					if ($_GET['order'] == $sorting) {
-						$activeOrder = " active";
+						$activeOrder = "active";
 					} else {
 						$activeOrder = "";
 					}
 				}
+					
+				
 				$params = array_merge($_GET, ["cat" => $currentCat['name'], "order" => $sorting]);
 				unset($params['page']);
 				$new_query_string = http_build_query($params);
@@ -140,31 +142,35 @@
 			}
 
 			// Pagination links
-			print "<div class='row pagination'>";
-			print "<div class='col-3'>";
+			print "<div class='row'>";
+			print "<nav>";
+			print "<ul class='pagination'>";
+			$params = array_merge($_GET, array("page" => $currentPage-1));
+			$new_query_string = http_build_query($params);
+			$disabled = "class='disabled'";
 			if ($currentPage <= $pages && $currentPage > 1) {
-				$params = array_merge($_GET, array("page" => $currentPage-1));
-				$new_query_string = http_build_query($params);
-				print "<a href='index.php?" . $new_query_string . "' class='leftPag'>Föregående sida</a>";
+				$disabled = "";
 			}
-			print "</div>";
-			print "<div class='col-6 nrPag'>";
+			print "<li $disabled ><a disabled href='index.php?" . $new_query_string . "' class='leftPag'>Föregående sida</a></li>";
 			
 			for ($i = 0; $i < $pages; $i++) {
 				if ($i+1 == $currentPage) {
-					print "<a href='index.php?page=" . ($i+1) . "' class='bold'>" . ($i+1) . "</a>";
+					print "<li class='active'><a href='index.php?page=" . ($i+1) . "' >" . ($i+1) . "</a></li>";
 				} else {
-					print "<a href='index.php?page=" . ($i+1) . "' class=''>" . ($i+1) . "</a>";
+					print "<li><a href='index.php?page=" . ($i+1) . "' class=''>" . ($i+1) . "</a></li>";
 				}
 			}
-			print "</div>";
-			print "<div class='col-3'>";
+
+			$params = array_merge($_GET, ["page" => $currentPage+1]);
+			$new_query_string = http_build_query($params);	
+			$disabled = "class='disabled'";	
 			if ($currentPage < $pages) {
-				$params = array_merge($_GET, ["page" => $currentPage+1]);
-				$new_query_string = http_build_query($params);
-				print "<a href='index.php?" . $new_query_string . "' class='rightPag'>Nästa sida</a>";
+				$disabled = "";
 			}
-			print "</div>";
+			print "<li $disabled ><a href='index.php?" . $new_query_string . "' class='rightPag'>Nästa sida</a></li>";
+
+			print "</ul>";
+			print "</nav>";
 			print "</div>";
 		} // if $postCount != 0
 		?>

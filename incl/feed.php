@@ -143,6 +143,7 @@
 
 			// Pagination links
 			print "<div class='row'>";
+			print "<div class='col-xs-12'>";
 			print "<nav>";
 			print "<ul class='pagination'>";
 			$params = array_merge($_GET, array("page" => $currentPage-1));
@@ -171,6 +172,7 @@
 
 			print "</ul>";
 			print "</nav>";
+			print "</div>";
 			print "</div>";
 		} // if $postCount != 0
 		?>

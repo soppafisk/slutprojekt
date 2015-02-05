@@ -1,5 +1,5 @@
 <div class="row">
-	<div class="col-8">
+	<div class="col-md-12">
 		<!--- Category Menu -->
 		<nav id='catNav'>		
 		<?php
@@ -11,12 +11,12 @@
 		$categories = sqlQuery("SELECT * FROM categories");
 		$currentCat = $categories[0];
 
-		$activeClass = "class='active'";
+		$activeClass = " active";
 		foreach ($categories as $category) {
 			if (isset($_GET['cat'])) {
 				if (in_array($_GET['cat'], $category)) {
 					$currentCat = $category;
-					$activeClass = "class='active'";
+					$activeClass = " active";
 				} else {
 					$activeClass = "";
 				}
@@ -26,7 +26,7 @@
 			unset($params['page']);
 			unset($params['order']);
 			$new_query_string = http_build_query($params);
-			print "<a $activeClass href='index.php?" . $new_query_string . "'>" . $category['fullName'] . "</a>";
+			print "<a class='btn btn-default $activeClass' role='button' href='index.php?" . $new_query_string . "'>" . $category['fullName'] . "</a>";
 			$activeClass = "";
 		}
 		?>
@@ -48,7 +48,7 @@
 				
 				if (isset($_GET['order'])) {
 					if ($_GET['order'] == $sorting) {
-						$activeOrder = "class='active'";
+						$activeOrder = " active";
 					} else {
 						$activeOrder = "";
 					}
@@ -56,7 +56,7 @@
 				$params = array_merge($_GET, ["cat" => $currentCat['name'], "order" => $sorting]);
 				unset($params['page']);
 				$new_query_string = http_build_query($params);
-				print "<a $activeOrder href='index.php?" . $new_query_string . "'>" . $values['name'] . "</a>";
+				print "<a class='btn btn-default $activeOrder' href='index.php?" . $new_query_string . "'>" . $values['name'] . "</a>";
 				$activeOrder = "";
 			}
 			?>
@@ -64,7 +64,7 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-8">
+	<div class="col-md-8">
 		<?php
 		// Selected category into query
 		$catQuery = " WHERE cat_id LIKE '%'";

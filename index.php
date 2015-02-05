@@ -45,6 +45,7 @@ require "incl/aside.php";
 
 
 
-</div>
+	</div> <!-- wrapper -->
+</div> <!-- container -->
 </body>
 </html>

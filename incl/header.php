@@ -5,37 +5,38 @@
 	<meta name="description" content="">
 
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
-	
-	<link rel="stylesheet" href="style/base.css">
-	<link rel="stylesheet" href="style/style.css">
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/style.css">
 
 	<link rel="shortcut icon" href="favicon.png">
 	
 	<title>Trasig</title>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 	<script src="scripts/scripts.js"></script>
 </head>
 
 <body>
+<div class="container">
+	<div id="hwrapper">
+		<header>
+			<a href="index.php"><img src="img/logo.png" alt="logo" id="logo"></a>
+			<nav id="headernav">
+				<a href="index.php">Hem</a>
+				<a href='index.php?p=search'>Sök</a>
+				<?php
+				if (isLoggedIn()) {
+					print "<a href='index.php?p=writepost'>Skriv inlägg</a> ";
+					print "Inloggad som: <a href='index.php?p=profile&u=" . $_SESSION['user']['username'] . "'>" . $_SESSION['user']['username'] . "</a>";
+					print " <a href='index.php?p=logout'>Logga ut</a>";
+				} else {
+					print "<a href='index.php?p=login'>Logga in</a>";
+				}
+				?>
+			</nav>
 
-<div id="hwrapper">
-	<header>
-		<a href="index.php"><img src="img/logo.png" alt="logo" id="logo"></a>
-		<nav id="headernav">
-			<a href="index.php">Hem</a>
-			<a href='index.php?p=search'>Sök</a>
-			<?php
-			if (isLoggedIn()) {
-				print "<a href='index.php?p=writepost'>Skriv inlägg</a> ";
-				print "Inloggad som: <a href='index.php?p=profile&u=" . $_SESSION['user']['username'] . "'>" . $_SESSION['user']['username'] . "</a>";
-				print " <a href='index.php?p=logout'>Logga ut</a>";
-			} else {
-				print "<a href='index.php?p=login'>Logga in</a>";
-			}
-			?>
-		</nav>
-
-	</header>
-</div>
-<div id="wrapper">
+		</header>
+	</div>
+	<div id="wrapper">

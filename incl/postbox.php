@@ -1,6 +1,6 @@
 <div class="postbox row">
 
-	<div class="col-2">
+	<div class="col-xs-2">
 
 		<?php 
 			$hasVoted = "";
@@ -18,7 +18,7 @@
 		?>
 
 	</div>
-	<div class="col-10">
+	<div class="col-xs-10">
 		<h4 class='post_title'><a href='<?php print $post['link']; ?>'><?php print $post['title']; ?></a></h4>
 		Av: <?php print "<a href='index.php?p=profile&u={$post['username']}'>{$post['username']}</a>"; ?>
 

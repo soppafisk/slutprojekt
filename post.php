@@ -52,7 +52,6 @@ if (isLoggedIn()) {
 }
 
 print "<hr>";
-print "<pre>";
 
 foreach ($comments as $comment) {
 	print "<a href='index.php?p=profile&u={$comment['username']}'>{$comment['username']}</a>";

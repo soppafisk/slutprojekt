@@ -5,15 +5,14 @@
 	<meta name="description" content="">
 
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-
-	
 	<link rel="stylesheet" href="style/base.css">
 	<link rel="stylesheet" href="style/style.css">
 
 	<link rel="shortcut icon" href="favicon.png">
 	
 	<title>Trasig</title>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="scripts/scripts.js"></script>
 </head>
 

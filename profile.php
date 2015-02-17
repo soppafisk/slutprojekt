@@ -1,6 +1,6 @@
 <?php require_once "incl/header.php"; ?>
 <div class="row">
-	<div class="col-8">
+	<div class="col-xs-8">
 
 	<?php 
 

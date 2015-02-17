@@ -1,5 +1,5 @@
 <div class="row">
-	<div class="col-8">
+	<div class="col-md-12">
 		<!--- Category Menu -->
 		<nav id='catNav'>		
 		<?php
@@ -11,12 +11,12 @@
 		$categories = sqlQuery("SELECT * FROM categories");
 		$currentCat = $categories[0];
 
-		$activeClass = "class='active'";
+		$activeClass = " active";
 		foreach ($categories as $category) {
 			if (isset($_GET['cat'])) {
 				if (in_array($_GET['cat'], $category)) {
 					$currentCat = $category;
-					$activeClass = "class='active'";
+					$activeClass = " active";
 				} else {
 					$activeClass = "";
 				}
@@ -26,7 +26,7 @@
 			unset($params['page']);
 			unset($params['order']);
 			$new_query_string = http_build_query($params);
-			print "<a $activeClass href='index.php?" . $new_query_string . "'>" . $category['fullName'] . "</a>";
+			print "<a class='btn btn-default $activeClass' role='button' href='index.php?" . $new_query_string . "'>" . $category['fullName'] . "</a>";
 			$activeClass = "";
 		}
 		?>
@@ -43,20 +43,22 @@
 
 		<nav id="orderNav">
 			<?php
-			$activeOrder = "class='active'";
+			$activeOrder = "active";
 			foreach ($sortings as $sorting => $values) {
-				
+							
 				if (isset($_GET['order'])) {
 					if ($_GET['order'] == $sorting) {
-						$activeOrder = "class='active'";
+						$activeOrder = "active";
 					} else {
 						$activeOrder = "";
 					}
 				}
+					
+				
 				$params = array_merge($_GET, ["cat" => $currentCat['name'], "order" => $sorting]);
 				unset($params['page']);
 				$new_query_string = http_build_query($params);
-				print "<a $activeOrder href='index.php?" . $new_query_string . "'>" . $values['name'] . "</a>";
+				print "<a class='btn btn-default $activeOrder' href='index.php?" . $new_query_string . "'>" . $values['name'] . "</a>";
 				$activeOrder = "";
 			}
 			?>
@@ -64,7 +66,7 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-8">
+	<div class="col-md-8">
 		<?php
 		// Selected category into query
 		$catQuery = " WHERE cat_id LIKE '%'";
@@ -140,30 +142,36 @@
 			}
 
 			// Pagination links
-			print "<div class='row pagination'>";
-			print "<div class='col-3'>";
+			print "<div class='row'>";
+			print "<div class='col-xs-12'>";
+			print "<nav>";
+			print "<ul class='pagination'>";
+			$params = array_merge($_GET, array("page" => $currentPage-1));
+			$new_query_string = http_build_query($params);
+			$disabled = "class='disabled'";
 			if ($currentPage <= $pages && $currentPage > 1) {
-				$params = array_merge($_GET, array("page" => $currentPage-1));
-				$new_query_string = http_build_query($params);
-				print "<a href='index.php?" . $new_query_string . "' class='leftPag'>Föregående sida</a>";
+				$disabled = "";
 			}
-			print "</div>";
-			print "<div class='col-6 nrPag'>";
+			print "<li $disabled ><a disabled href='index.php?" . $new_query_string . "' class='leftPag'>Föregående sida</a></li>";
 			
 			for ($i = 0; $i < $pages; $i++) {
 				if ($i+1 == $currentPage) {
-					print "<a href='index.php?page=" . ($i+1) . "' class='bold'>" . ($i+1) . "</a>";
+					print "<li class='active'><a href='index.php?page=" . ($i+1) . "' >" . ($i+1) . "</a></li>";
 				} else {
-					print "<a href='index.php?page=" . ($i+1) . "' class=''>" . ($i+1) . "</a>";
+					print "<li><a href='index.php?page=" . ($i+1) . "' class=''>" . ($i+1) . "</a></li>";
 				}
 			}
-			print "</div>";
-			print "<div class='col-3'>";
+
+			$params = array_merge($_GET, ["page" => $currentPage+1]);
+			$new_query_string = http_build_query($params);	
+			$disabled = "class='disabled'";	
 			if ($currentPage < $pages) {
-				$params = array_merge($_GET, ["page" => $currentPage+1]);
-				$new_query_string = http_build_query($params);
-				print "<a href='index.php?" . $new_query_string . "' class='rightPag'>Nästa sida</a>";
+				$disabled = "";
 			}
+			print "<li $disabled ><a href='index.php?" . $new_query_string . "' class='rightPag'>Nästa sida</a></li>";
+
+			print "</ul>";
+			print "</nav>";
 			print "</div>";
 			print "</div>";
 		} // if $postCount != 0

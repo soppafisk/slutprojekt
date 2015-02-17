@@ -1,0 +1,73 @@
+body {
+	background: #DCEDC8;
+	font-family: 'Open Sans', sans-serif;	
+	overflow-y: scroll;
+}
+
+.container {
+	background: white;
+}
+
+nav ul.pagination li {
+	text-align: center;
+}
+
+/* Voting */
+.up.arrow, .down.arrow {
+	width: 31px;
+	height: 27px;
+	overflow: hidden;
+	position: relative;
+}
+
+.up.arrow {
+	background: url("../img/uparrow.png") 0 0;
+}
+
+.up.arrow:hover {
+	background: url("../img/uparrow.png") 0 -27px;
+	cursor: pointer;
+}
+
+.down.arrow {
+	margin-top: 10px;
+	background: url("../img/downarrow.png") 0 0;
+}
+
+.down.arrow:hover {
+	background: url("../img/downarrow.png") 0 -27px;
+	cursor: pointer;
+}
+
+.arrow.up.hasVoted_1, .arrow.up.hasVoted_1:hover {
+	background: url("../img/greyarrow.png") 0 -27px;
+}
+
+.arrow.up.hasVoted_-1, .arrow.up.hasVoted_-1:hover {
+	background: url("../img/greyarrow.png") 0 0px;
+}
+
+.arrow.down.hasVoted_-1, .arrow.down.hasVoted_-1:hover {
+	background: url("../img/greyarrow.png") 0 -27px;
+	-moz-transform: scaleY(-1);
+    -o-transform: scaleY(-1);
+    -webkit-transform: scaleY(-1);
+    transform: scaleY(-1);
+    filter: FlipV;
+    -ms-filter: "FlipV";
+}
+
+.arrow.down.hasVoted_1, .arrow.down.hasVoted_1:hover {
+	background: url("../img/greyarrow.png") 0 0px;
+	-moz-transform: scaleY(-1);
+    -o-transform: scaleY(-1);
+    -webkit-transform: scaleY(-1);
+    transform: scaleY(-1);
+    filter: FlipV;
+    -ms-filter: "FlipV";
+}
+
+/* PROFILE */
+.profilePicture {
+	max-width: 200px;
+}

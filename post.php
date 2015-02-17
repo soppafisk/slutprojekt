@@ -1,6 +1,6 @@
 <?php require_once "incl/header.php"; ?>
-
-<div class="col-8">
+<div class="row">
+<div class="col-xs-8">
 
 <?php
 
@@ -50,16 +50,24 @@ if (isLoggedIn()) {
 } else {
 	print "<a href='index.php?p=login'>Logga in</a> för att kommentera";
 }
-
-print "<hr>";
-print "<pre>";
-
-foreach ($comments as $comment) {
-	print "<a href='index.php?p=profile&u={$comment['username']}'>{$comment['username']}</a>";
-	print "<br>";
-	print $comment['content'];
-	print "<hr>";
-} 
 ?>
+<hr>
+	<div class='row'>
+		<div class="col-xs-12">
+		<?php
+		if (!$comments) {
+			print "Inga kommentarer än";
+		}
 
+		foreach ($comments as $comment) {
+			print "<a href='index.php?p=profile&u={$comment['username']}'>{$comment['username']}</a>";
+			print "<br>";
+			print $comment['content'];
+			print "<hr>";
+		} 
+
+		?>
+		</div>
+	</div>
+</div>
 </div>

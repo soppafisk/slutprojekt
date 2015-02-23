@@ -1,15 +1,95 @@
 body {
-	background: #DCEDC8;
+	background: #FFF;
 	font-family: 'Open Sans', sans-serif;	
 	overflow-y: scroll;
 }
 
-.container {
-	background: white;
+.container-fluid {
+	padding: 0;
 }
 
 nav ul.pagination li {
 	text-align: center;
+}
+
+.wide {
+
+}
+
+.row {
+	margin: 0;
+}
+
+
+#hWrapper {
+	background: #7CB342;
+	position: absolute;
+	top: 0;
+	z-index: 20;
+	width: 100%;
+}
+
+#wrapper {
+	margin-top: 100px;
+}
+
+/* Posts menu */
+
+#postsMenu {
+
+}
+#postsMenu a {
+	color: #FFF;
+}
+
+#catNav {
+	background: #7CB342;
+	overflow: auto;	
+}
+
+#catNav, #orderNav {
+	text-align: center;
+	list-style-type: none;
+}
+
+#catNav li {
+	float: left;
+
+}
+
+
+#catNav a {
+	-webkit-border-top-left-radius: 10px;
+	-webkit-border-top-right-radius: 10px;
+	-moz-border-radius-topleft: 10px;
+	-moz-border-radius-topright: 10px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+
+#catNav a, #orderNav a {
+	padding: 10px;
+	width: 130px;
+	float: left;
+}
+
+#catNav a.active {
+	background: #8BC34A;
+}
+
+#orderNav a.active {
+	text-decoration: underline;
+}
+
+#orderNav {
+	list-style-type: none;
+	overflow: auto;
+	background: #8BC34A;
+}
+#orderNav li {
+}
+
+#orderNav a {
 }
 
 /* Voting */

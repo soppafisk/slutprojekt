@@ -23,74 +23,19 @@ nav ul.pagination li {
 
 #hWrapper {
 	background: #7CB342;
-	position: absolute;
+	position: fixed;
 	top: 0;
 	z-index: 20;
 	width: 100%;
 }
 
 #wrapper {
-	margin-top: 100px;
+	margin-top: 80px;
 }
 
 /* Posts menu */
 
-#postsMenu {
 
-}
-#postsMenu a {
-	color: #FFF;
-}
-
-#catNav {
-	background: #7CB342;
-	overflow: auto;	
-}
-
-#catNav, #orderNav {
-	text-align: center;
-	list-style-type: none;
-}
-
-#catNav li {
-	float: left;
-
-}
-
-
-#catNav a {
-	-webkit-border-top-left-radius: 10px;
-	-webkit-border-top-right-radius: 10px;
-	-moz-border-radius-topleft: 10px;
-	-moz-border-radius-topright: 10px;
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
-}
-
-#catNav a, #orderNav a {
-	padding: 10px;
-	width: 130px;
-	float: left;
-}
-
-#catNav a.active {
-	background: #8BC34A;
-}
-
-#orderNav a.active {
-	text-decoration: underline;
-}
-
-#orderNav {
-	list-style-type: none;
-	overflow: auto;
-	background: #8BC34A;
-}
-#orderNav li {
-}
-
-#orderNav a {
-}
 
 /* Voting */
 .up.arrow, .down.arrow {

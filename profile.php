@@ -1,6 +1,6 @@
 <?php require_once "incl/header.php"; ?>
 <div class="row">
-	<div class="col-xs-8">
+	<div class="col-xs-10 col-xs-offset-1">
 
 	<?php 
 
@@ -43,6 +43,10 @@
 
 			print "<h5>Senaste posterna:</h5>";
 
+			?>
+	</div>
+
+		<?php
 			$singleUserQuery = " AND username = '$u'";
 			$header = "profil";
 			require "incl/feed.php";
@@ -52,8 +56,6 @@
 
 
 	?>
-	</div>
-
 	<?php require "incl/topusers.php"; ?>
 
 </div>

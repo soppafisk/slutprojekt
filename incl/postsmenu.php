@@ -2,11 +2,6 @@
 	<!--- Category Menu -->
 	<ul id='catNav'>	
 		<?php
-		$params = array_merge($_GET, ["cat" => "all"]);
-		unset($params['page']);
-		unset($params['order']);
-		$new_query_string = http_build_query($params);
-
 		$categories = sqlQuery("SELECT * FROM categories");
 		$currentCat = $categories[0];
 
@@ -21,10 +16,14 @@
 				}
 			} 
 
-			$params = array_merge($_GET, ["cat" => $category['name']]);
-			unset($params['page']);
-			unset($params['order']);
-			$new_query_string = http_build_query($params);
+			$new_query_string = http_build_query(["cat" => $category['name']]);
+			if (isset($_GET['p']) && $_GET['p'] == 'profile') {
+				$params = array_merge($_GET, ["cat" => $category['name']]);
+				unset($params['page']);
+				unset($params['order']);
+				$new_query_string = http_build_query($params);
+			}
+
 			print "<li><a class='$activeClass' href='index.php?" . $new_query_string . "'>" . $category['fullName'] . "</a></li>";
 			
 			if ($activeClass != "") :

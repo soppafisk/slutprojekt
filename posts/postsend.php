@@ -3,6 +3,10 @@ session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
+	$_SESSION['posted']['title'] = $_POST['title'];
+	$_SESSION['posted']['link'] = $_POST['link'];
+	$_SESSION['posted']['content'] = $_POST['content'];
+
 	require_once "../config.php";
 	require_once "../functions/functions.php";
 	$error = false;
@@ -56,6 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 	$user_id = $_SESSION['user']['id'];
 	
 	if (!$error) {
+		unset($_SESSION['posted']);
 		if (!$stmt->execute()) {
 			print $mysqli->error;
 			die;

@@ -3,13 +3,18 @@
 
 require "incl/header.php";
 $username = "";
-if (isset($_SESSION['feedback'])) {
-	print $_SESSION['feedback']['message'];
-	unset($_SESSION['feedback']);
-}
+
 ?>
+
 <div class="row">
-	<div class="col-xs-4">
+	<div class="col-xs-12 col-md-7 col-lg-4">
+		<?php
+		if (isset($_SESSION['feedback'])) {
+			print $_SESSION['feedback']['message'];
+			$username = $_SESSION['feedback']['username'];
+			unset($_SESSION['feedback']);
+		}
+		?>
 		<h2>Logga in</h2>
 
 		<form id="loginform" action="forms/sendlogin.php" method="POST">

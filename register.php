@@ -1,5 +1,8 @@
 <?php
 
+$username = "";
+$email = "";
+
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 	$location = 'Location: index.php?p=register';
 
@@ -70,26 +73,35 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 ?>
 
 <?php require "incl/header.php"; ?>
+<div class="row">
+	<div class="col-xs-12 col-md-7 col-lg-4">
 
-<div class="col-8">
+		<?php
+		if (isset($_SESSION['feedback'])){
+			print $_SESSION['feedback']['message'];
+			unset($_SESSION['feedback']);
+		}
+		?>
 
-	<?php
-	if (isset($_SESSION['feedback'])){
-		print $_SESSION['feedback']['message'];
-		unset($_SESSION['feedback']);
-	}
-	?>
-
-	<form id="registerform" action="index.php?p=register" method="POST">
-		<label for="username">Användarnamn:</label>
-		<input type="text" name="username" value="<?php print $username; ?>">
-		<label for="email">Email:</label> 
-		<input type="text" name="email" value="<?php print $email; ?>">
-		<label for="password">Lösenord:</label> 
-		<input type="password" name="password">
-		<label for="password2">Lösenordet igen:</label> 
-		<input type="password" name="password2">
-		<div id="feedback"></div>
-		<input type="submit" value="Registrera!">
-	</form>
+		<form id="registerform" action="index.php?p=register" method="POST">
+			<div class="form-group">
+				<label for="username">Användarnamn:</label>
+				<input type="text" name="username" class="form-control" value="<?php print $username; ?>">
+			</div>
+			<div class="form-group">
+				<label for="email">Email:</label> 
+				<input type="text" name="email" class="form-control" value="<?php print $email; ?>">
+			</div>
+			<div class="form-group">
+				<label for="password">Lösenord:</label> 
+				<input type="password" name="password" class="form-control">
+			</div>
+			<div class="form-group">
+				<label for="password2">Lösenordet igen:</label> 
+				<input type="password" name="password2" class="form-control">
+			</div>
+			<div id="feedback"></div>
+			<input type="submit" class="btn btn-default" value="Registrera!">
+		</form>
+	</div>
 </div>

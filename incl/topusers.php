@@ -2,7 +2,7 @@
 
 $topUsers = sqlQuery("SELECT username, nr_posts FROM users
 LEFT JOIN 
-	(SELECT COUNT(*) as nr_posts, user_id FROM posts GROUP BY user_id) p
+	(SELECT COUNT(*) as nr_posts, user_id FROM posts WHERE deleted=0 GROUP BY user_id) p
 ON users.id = p.user_id
 ORDER BY nr_posts DESC
 LIMIT 0, 10");

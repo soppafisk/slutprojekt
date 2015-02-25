@@ -31,6 +31,9 @@ if (isset($_GET['p'])) {
 		case 'search':
 			require "search.php";
 			break;
+		case 'delete':
+			require "delete.php";
+			break;
 		case 'list':
 		default:
 			require "list.php";

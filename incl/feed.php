@@ -21,7 +21,7 @@
 
 	// query for counting posts
 	$countQuery = "SELECT username, COUNT(*) as counter 
-		FROM posts JOIN users ON posts.user_id = users.id" . $catQuery . $singleUserQuery;
+		FROM posts JOIN users ON posts.user_id = users.id" . $catQuery . "AND deleted=0" . $singleUserQuery;
 	// best lazy fix ever
 	if ($orderQuery == $sortings['2']['query']) {
 		$countQuery .= $sortings['2']['countQuery'];
@@ -56,7 +56,7 @@
 				WHERE user_id = '" . $_SESSION['user']['id'] . "') yourvote
 				ON posts.id = yourvote.post_id ";
 
-		$query .= $catQuery . $singleUserQuery;
+		$query .= $catQuery . "AND deleted=0" . $singleUserQuery;
 		$query .= $orderQuery;
 
 		$query .= "LIMIT $offset, $postsPerPage";

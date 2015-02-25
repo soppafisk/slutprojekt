@@ -11,15 +11,18 @@
 		<div class="up arrow <?php print "post_" . $post['id'] . "$hasVoted"; ?>"></div>
 		<div class="score"><?php $post['score'] !== null ? print $post['score'] : print "Inga röster";?></div>
 		<div class="down arrow <?php print "post_" . $post['id'] . "$hasVoted"; ?>"></div>
-		<?php
-			if ($post['nsfw']) {
-				print "NSFW";
-			}
-		?>
+
 
 	</div>
 	<div class="col-xs-10">
-		<h4 class='post_title'><a href='<?php print $post['link']; ?>'><?php print $post['title']; ?></a></h4>
+		<h4 class='post_title'>
+			<?php
+				if ($post['nsfw']) {
+					print "<span class='nsfw'>NSFW</span>";
+				}
+			?>
+			<a href='<?php print $post['link']; ?>'><?php print $post['title']; ?></a>
+		</h4>
 		Av: <?php print "<a href='index.php?p=profile&u={$post['username']}'>{$post['username']}</a>"; ?>
 
 		<br>

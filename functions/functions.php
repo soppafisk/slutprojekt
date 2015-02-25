@@ -33,7 +33,7 @@ function dbQuery($query) {
 
 ////////////////////////////////////////////////////////////////////
 /// Send SELECT query to db, return data[]
-function sqlQuery($query) {
+function sqlQuery($query, $action = "SELECT") {
 	$mysqli = new mysqli(SERVERNAME, USERNAME, PASSWORD, DATABASE);
 
 	if ($mysqli->connect_errno) {
@@ -42,10 +42,12 @@ function sqlQuery($query) {
 
 	$data = [];
 	if ($result = $mysqli->query($query)) {
-		while($row = $result->fetch_assoc()) {
-			$data[] = $row;
-		}
-		$result->close();
+		if ($action == "SELECT") {
+			while($row = $result->fetch_assoc()) {
+				$data[] = $row;
+			}
+			$result->close();
+		}	
 	}
 
 	$mysqli->close();

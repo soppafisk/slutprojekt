@@ -8,7 +8,7 @@
 if (isset($_GET['id'])) {
 	$id = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
 	
-	$result = sqlQuery("SELECT posts.*, users.username FROM posts JOIN users on posts.user_id = users.id and posts.id='$id'");
+	$result = sqlQuery("SELECT posts.*, users.username FROM posts JOIN users on posts.user_id = users.id and posts.id='$id' WHERE deleted=0");
 	$post = $result[0];
 
 	$comments = sqlQuery("SELECT comments.*, users.username FROM comments JOIN users on comments.user_id = users.id and comments.post_id='$id'");
@@ -19,6 +19,7 @@ $adminPost = false;
 if (isLoggedIn()) {
 	if ($_SESSION['user']['id']==$post['user_id']) {
 		$adminPost = true;
+		$_SESSION['post']['id'] = $post['id'];
 	}
 }
 
@@ -32,8 +33,11 @@ if ($post['nsfw'] == true) {
 <p class='single-post content'> 
 <?php print $post['content']; ?> 
 </p>
-
 <?php 
+if ($adminPost) {
+	print "<a href='index.php?p=delete'>Ta bort post</a>";
+}
+
 if (isLoggedIn()) {
 	$_SESSION['commentOnPost'] = $post['id'];
 ?>
@@ -55,8 +59,7 @@ if (isLoggedIn()) {
 }
 ?>
 <hr>
-	<div class='row'>
-		<div class="col-xs-12">
+
 		<?php
 		if (!$comments) {
 			print "Inga kommentarer än";
@@ -65,16 +68,16 @@ if (isLoggedIn()) {
 		foreach ($comments as $comment) :
 			?>
 
-			<div class="well">
-				<?php print "<a href='index.php?p=profile&u={$comment['username']}'>{$comment['username']}</a>"; ?>
-				<br>
-				<?php print $comment['content']; ?>
+			<div class="well comment">
+				<div class="comment-top">
+					<?php print "<a href='index.php?p=profile&u={$comment['username']}'>{$comment['username']}</a>"; ?>
+					<?php print "<span class='right'>" . $comment['comment_date'] . "</span>"; ?>
+				</div>
+				<p><?php print $comment['content']; ?></p>
 			</div>
 
 		<?php endforeach;
 
 		?>
-		</div>
-	</div>
 </div>
 </div>

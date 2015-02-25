@@ -28,21 +28,24 @@
 			<div class="col-xs-4">
 				<a href="index.php"><img src="img/logo.png" alt="logo" id="logo"></a>
 			</div>
-			<nav id="headernav" class="col-xs-4 col-xs-offset-4">
-				<a href="index.php">Hem</a>
-				<a href='index.php?p=search'>Sök</a>
-				<?php
-				if (isLoggedIn()) {
-					print "<a href='index.php?p=writepost'>Skriv inlägg</a> ";
-					print "Inloggad som: <a href='index.php?p=profile&u=" . $_SESSION['user']['username'] . "'>" . $_SESSION['user']['username'] . "</a>";
-					print " <a href='index.php?p=logout'>Logga ut</a>";
-				} else {
-					print "<a href='index.php?p=login'>Logga in</a>";
-				}
-				?>
-			</nav>
+			<div class="col-xs-8">
+				<nav id="headernav" class="right">
+					<a href="index.php">Hem</a>
+					<a href='index.php?p=search'>Sök</a>
+					<?php
+					if (isLoggedIn()) {
+						print "<a href='index.php?p=writepost'>Skriv inlägg</a> ";
+						print "<a id='yourProfile' href='index.php?p=profile&u=" . $_SESSION['user']['username'] . "'>" . $_SESSION['user']['username'] . "</a>";
+						print " <a href='index.php?p=logout'>Logga ut</a>";
+					} else {
+						print "<a href='index.php?p=login'>Logga in</a>";
+					}
+					?>
+
+				</nav>
+			</div>
 			</div>
 		</header>
 	</div>
 	<div id="wrapper" class="row">
-		<div class="col-md-10 col-md-offset-1 col-xs-12">
+		<div class="col-lg-10 col-lg-offset-1 col-xs-12">

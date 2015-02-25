@@ -4,6 +4,17 @@
 <?php if (isLoggedIn()): 
 	$categories = sqlQuery("SELECT * FROM categories");
 	$currentCat = 0;
+
+	$title = "";
+	$link = "";
+	$content = "";
+
+	if (isset($_SESSION['posted'])) {
+		$title = $_SESSION['posted']['title'];
+		$link = $_SESSION['posted']['link'];
+		$content =$_SESSION['posted']['content'];
+		unset($_SESSION['posted']);
+	}
 ?>
 
 	<h1>Skriv inlägg</h1>
@@ -34,15 +45,16 @@
 		</div>
 		<div class="formgroup">
 			<label for="title">Titel:</label>
-			<input type="text" class="form-control" name="title">
+			<input type="text" class="form-control" name="title" value='<?php print $title; ?>'>
 		</div>
 		<div class="formgroup">
 			<label for="link">Länk: (glöm inte http://)</label>
-			<input type="text" class="form-control" name="link">
+			<input type="text" class="form-control" name="link" value='<?php print $link; ?>'>
 		</div>
 		<div class="formgroup">
 			<label for="content">Beskrivning:</label>
-			<textarea name="content" cols="30" rows="10" class="form-control"></textarea>
+			<textarea name="content" cols="30" rows="10" class="form-control"><?php print $content; ?>
+			</textarea>
 		</div>
 		<div class="checkbox">
 			<label><input type="checkbox" name="nsfw"><abbr title="Not Safe For Work">NSFW</abbr></label>

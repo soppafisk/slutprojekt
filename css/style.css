@@ -4,6 +4,16 @@ body {
 	overflow-y: scroll;
 }
 
+a {
+	color: #01579B;
+}
+
+
+
+.post_title a:visited, a:hover {
+	color: #311B92;
+}
+
 .container-fluid {
 	padding: 0;
 }
@@ -12,14 +22,9 @@ nav ul.pagination li {
 	text-align: center;
 }
 
-.wide {
-
-}
-
 .row {
 	margin: 0;
 }
-
 
 #hWrapper {
 	background: #7CB342;
@@ -31,6 +36,19 @@ nav ul.pagination li {
 
 #wrapper {
 	margin-top: 105px;
+}
+
+.nsfw {
+	width: 100%;
+	height: 25px;
+	color: white;
+	text-align: center;
+	font-size: 1.3em;
+	background: #E64A19;
+}
+
+.single-post.content {
+	margin: 25px 0;
 }
 
 /* Posts menu */
@@ -52,10 +70,14 @@ nav ul.pagination li {
 #catNav a {
 	float: left;
 	width: 100%;
-	padding: 5px 10px;
+	padding: 8px 13px;
 	color: white;
 	background: #7CB342;
 
+}
+
+#catNav a.active {
+	font-weight: bold;
 }
 
 #catNav>li>a.active, #catNav a:hover {
@@ -74,6 +96,12 @@ nav ul.pagination li {
 }
 
 /* Voting */
+div.score {
+	margin-left: 10px;
+	margin-top: 5px;
+	font-weight: bold;
+}
+
 .up.arrow, .down.arrow {
 	width: 31px;
 	height: 27px;
@@ -130,5 +158,20 @@ nav ul.pagination li {
 
 /* PROFILE */
 .profilePicture {
-	max-width: 200px;
+	max-width: 100%;
+}
+
+#profile {
+	margin-bottom: 25px;
+}
+
+#latestPosts {
+	margin-bottom: 25px;
+}
+
+#latestPosts h4 {
+	background: #7CB342;
+	color: white;
+	padding: 10px;
+	margin: 0;
 }

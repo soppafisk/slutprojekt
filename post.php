@@ -1,6 +1,7 @@
 <?php require_once "incl/header.php"; ?>
 <div class="row">
-<div class="col-xs-8">
+<?php require "incl/postsmenu.php"; ?>
+<div class="col-xs-12 col-md-7">
 
 <?php
 
@@ -13,8 +14,6 @@ if (isset($_GET['id'])) {
 	$comments = sqlQuery("SELECT comments.*, users.username FROM comments JOIN users on comments.user_id = users.id and comments.post_id='$id'");
 }
 
-print "<h1>POST</h1>";
-
 // If its your post, you 
 $adminPost = false;
 if (isLoggedIn()) {
@@ -24,22 +23,26 @@ if (isLoggedIn()) {
 }
 
 if ($post['nsfw'] == true) {
-	print "NSFW <br>";
+	print "<div class='nsfw'>Not Safe For Work</div>";
 }
+?>
 
-print "<h4 class='post_title'><a href='" . $post['link'] .  "'>" . $post['title'] . "</a></h4>";
-print "Av <a href='index.php?p=profile&u={$post['username']}'>{$post['username']}</a> den " . $post['post_date'];
-print "<p class='single-post content'>"; 
-print $post['content']; 
-print "</p>";
+<?php print "<h1 class='post_title'><a href='" . $post['link'] .  "'>" . $post['title'] . "</a></h1>"; ?>
+<p>Av <?php print "<a href='index.php?p=profile&u={$post['username']}'>{$post['username']}</a><br>" . $post['post_date']; ?></p>
+<p class='single-post content'> 
+<?php print $post['content']; ?> 
+</p>
 
+<?php 
 if (isLoggedIn()) {
-	print "(Inloggad som " . $_SESSION['user']['username'] . ")";
 	$_SESSION['commentOnPost'] = $post['id'];
 ?>
 	<form action="posts/commentsend.php" method="POST">
-		<textarea name="content" rows="3"></textarea>
-		<input type="submit" value="Skicka">
+		<div class="form-group">
+			<label for="content">Kommentera: (Inloggad som <?php print $_SESSION['user']['username']; ?>) </label>
+			<textarea name="content" class="form-control" rows="3"></textarea>
+		</div>
+		<input type="submit" class="btn btn-default" value="Skicka">
 	</form>
 
 <?php
@@ -59,12 +62,16 @@ if (isLoggedIn()) {
 			print "Inga kommentarer än";
 		}
 
-		foreach ($comments as $comment) {
-			print "<a href='index.php?p=profile&u={$comment['username']}'>{$comment['username']}</a>";
-			print "<br>";
-			print $comment['content'];
-			print "<hr>";
-		} 
+		foreach ($comments as $comment) :
+			?>
+
+			<div class="well">
+				<?php print "<a href='index.php?p=profile&u={$comment['username']}'>{$comment['username']}</a>"; ?>
+				<br>
+				<?php print $comment['content']; ?>
+			</div>
+
+		<?php endforeach;
 
 		?>
 		</div>

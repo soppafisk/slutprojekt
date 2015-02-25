@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Värd: 127.0.0.1
--- Tid vid skapande: 26 feb 2015 kl 00:41
+-- Tid vid skapande: 26 feb 2015 kl 00:49
 -- Serverversion: 5.6.17
 -- PHP-version: 5.5.12
 
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `parent_id` int(11) NOT NULL,
   `comment_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `content` varchar(2000) NOT NULL,
-  `edited_date` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `edited_date` timestamp NOT NULL,
   PRIMARY KEY (`id`),
   KEY `comment_user` (`user_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `nsfw` tinyint(1) DEFAULT '0',
   `user_id` int(11) NOT NULL,
   `cat_id` int(11) NOT NULL,
-  `edited_date` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `edited_date` timestamp NOT NULL,
   `deleted` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `posts_user` (`user_id`),

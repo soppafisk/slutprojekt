@@ -30,12 +30,48 @@ nav ul.pagination li {
 }
 
 #wrapper {
-	margin-top: 80px;
+	margin-top: 105px;
 }
 
 /* Posts menu */
 
+#postsMenu ul {
+	list-style: none;
+}
 
+#catNav {
+	padding: 0;
+}
+
+#catNav li {
+	display: block;
+	float: left;
+	width: 100%;
+}
+
+#catNav a {
+	float: left;
+	width: 100%;
+	padding: 5px 10px;
+	color: white;
+	background: #7CB342;
+
+}
+
+#catNav>li>a.active, #catNav a:hover {
+	background:#689F38;
+}
+
+#ordernav {
+	padding: 0;
+}
+
+#orderNav a {
+	padding-left: 15%;
+
+	background:#689F38;
+
+}
 
 /* Voting */
 .up.arrow, .down.arrow {

@@ -8,7 +8,7 @@ ORDER BY nr_posts DESC
 LIMIT 0, 10");
 ?>
 
-<div class="col-xs-4">
+<div class="col-xs-3">
 	<h4>Mest aktiva användare</h4>
 	<table border='0' class='table table-striped'>
 	<?php

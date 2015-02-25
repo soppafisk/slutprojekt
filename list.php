@@ -1,8 +1,11 @@
 <?php 
 
-require "incl/header.php"; 
+require "incl/header.php"; ?>
 
-$singleUserQuery = ""; 
-require "incl/feed.php";
 
-?>
+<div class="row">
+	<?php 
+	$singleUserQuery = ""; 
+	require "incl/feed.php";
+	?>
+</div>

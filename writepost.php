@@ -22,10 +22,12 @@
 								$selected = true;
 							}
 						}
-						print "<option value='{$category['id']}'";
-						if ($selected) 
-							print " selected ";
-						print ">{$category['fullName']}</option>";
+						if ($category['id'] !== "1") {
+							print "<option value='{$category['id']}'";
+							if ($selected) 
+								print " selected ";
+							print ">{$category['fullName']}</option>";
+						}
 					}
 				?>
 			</select>

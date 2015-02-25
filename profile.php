@@ -1,7 +1,7 @@
 <?php require_once "incl/header.php"; ?>
 
 
-<div class="row">
+<div id="profile" class="row">
 	<?php 
 
 	if (isset($_GET['u'])) :
@@ -29,8 +29,20 @@
 
 		<?php if ($user) : ?>
 		<div class="col-xs-2">
-			<img src='img/profiles/<?php print $user['profilePicture'];?>' class='profilePicture' alt='profilbild'>
-		<?php
+			<img src='img/profiles/<?php print $user['profilePicture'];?>' class='profilePicture img-thumbnail' alt='profilbild'>
+
+		</div>
+		<div class="col-xs-7">
+			<h2 class="profileName"><?php print $user['username']; ?></h2>
+			
+			<p>Medlem sedan: <?php print substr($user['account_date'], 0, 10); ?><br>
+
+			Antal poster: <?php print sqlQuery(
+				"SELECT COUNT(*) as count FROM `posts` WHERE user_id=" . $user['id']
+				)[0]["count"];
+			?>
+			</p>
+			<?php
 			// profile pic upload
 			if ($ownProfile) : ?>
 				<form enctype='multipart/form-data' action='forms/profilepicture.php' method='post'>
@@ -45,15 +57,6 @@
 				}
 			endif; ?>
 		</div>
-		<div class="col-xs-7">
-			<?php print $user['username']; ?>
-			<br>
-			
-			Medlem sedan: <?php print substr($user['account_date'], 0, 10); ?>
-			<hr>
-
-			<h5>Senaste posterna:</h5>
-		</div>
 		<?php endif; // if user  ?>
 
 
@@ -62,6 +65,7 @@
 <div class="row">
 	<?php
 	if ($user) {
+		print "<div id='latestPosts' class='col-xs-12 text-center'><h4>" . $user['username'] . "s poster</h4></div>";
 		require "incl/feed.php";
 	}
 	?>

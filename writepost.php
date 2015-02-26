@@ -53,8 +53,7 @@
 		</div>
 		<div class="formgroup">
 			<label for="content">Beskrivning:</label>
-			<textarea name="content" cols="30" rows="10" class="form-control"><?php print $content; ?>
-			</textarea>
+			<textarea name="content" cols="30" rows="10" class="form-control"><?php print $content; ?></textarea>
 		</div>
 		<div class="checkbox">
 			<label><input type="checkbox" name="nsfw"><abbr title="Not Safe For Work">NSFW</abbr></label>

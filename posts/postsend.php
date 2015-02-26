@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		$_SESSION['feedback']['link'] = "Du måste ange en riktig länk. Glöm inte http:// och sånt";
 	}
 
-	if (strlen($_POST['content']) <= 2000 && strlen($_POST['content']) > 3) {
+	if (strlen($_POST['content']) <= 2000) {
 		$content= $mysqli->real_escape_string($_POST['content']);
 	} else {
 		$error = true;
